@@ -1,0 +1,62 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Lucida Console', monospace;
+}
+
+#colors {
+    display: flex;
+    justify-content: space-around;
+}
+
+.color {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: bold;
+}
+
+.colorHex {
+    cursor: pointer;
+
+    margin: auto;
+    text-align: center;
+    color: white;
+    background-color: #00000077;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    padding: 10px;
+    border-radius: 10px;
+
+    transition: all .3s;
+}
+
+.colorHex:hover {
+    background-color: #00000055;
+}
+
+.colorHex:active {
+    background-color: #000000CC;
+}
+
+@media screen and (orientation:landscape) {
+    #colors {
+        flex-direction: row;
+    }
+    .color {
+        min-height: 100vh;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    #colors {
+        flex-direction: column;
+    }
+    .color {
+        min-width: 100vw;
+    }
+}

@@ -12,7 +12,7 @@ function generateNewColors(first = false) {
     let newContent="";
     window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
     for (const color of window.pageColors) {
-        newContent += `<div style="background:#${color.hex}">${color.hex}</div>`;
+        newContent += `<div class="color" style="background:#${color.hex}; width:${100/numberOfColors}vw; height:${100/numberOfColors}vh;"><span class="colorHex" onclick=" if (copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (copytcb('#${color.hex}')) copied(this);">#${color.hex}</span></div>`;
     }
     document.getElementById("colors").innerHTML = newContent;
 }
