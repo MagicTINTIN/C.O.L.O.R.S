@@ -133,6 +133,8 @@ html, body {
 
     box-sizing: border-box;
     border: solid 3px transparent;
+    border-top: none;
+    border-bottom: none;
 
     cursor: pointer;
 
@@ -150,10 +152,14 @@ html, body {
 
 .addBetween:hover {
     border: solid 3px white;
+    border-top: none;
+    border-bottom: none;
 }
 
 .addBetween:active {
     border: solid 3px black;
+    border-top: none;
+    border-bottom: none;
 }
 
 @media screen and (orientation:landscape) {

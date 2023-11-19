@@ -7,11 +7,9 @@ document.getElementById("body").addEventListener("keyup", (e) => {
 window.pageColors = [];
 window.numberOfColors = 5;
 
-function generateNewColors(first = false) {
-    console.log("NOT IMPLEMENTED YET");
-    let newContent = "";
-    window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
+function updateColors() {
     let i = 0;
+    let newContent = "";
     for (const color of window.pageColors) {
         let midColor = "";
         if (i < window.pageColors.length - 1)
@@ -23,10 +21,29 @@ function generateNewColors(first = false) {
         <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
         <span class="rgbValues">R: ${colorRGB.r}<br>G: ${colorRGB.g}<br>B: ${colorRGB.b}</span>
         </div>
-        ${(i < window.pageColors.length - 1) ? "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor("+ i + ", '" + midColor + "')\" ontouchstart=\"genNewColor("+ i + ", '" + midColor + "')\"><span>+</span></div>" : ""}`;
+        ${(i < window.pageColors.length - 1) ? "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"><span>+</span></div>" : ""}`;
         i++
     }
     document.getElementById("colors").innerHTML = newContent;
+}
+
+function generateNewColors(first = false) {
+    window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
+    updateColors()
+}
+
+function genNewColor(index, newcolor) {
+    let newColors = []
+    let i = 0;
+    for (const color of window.pageColors) {
+        newColors = [...newColors, color];
+        if (i == index)
+            newColors = [...newColors, { isLocked: false, hex: newcolor.replace("#","") }];
+        i++;
+    }
+    window.pageColors = newColors;
+    window.numberOfColors++;
+    updateColors();
 }
 
 function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
@@ -51,7 +68,7 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
                 }
                 color = color + randomVal
             }
-            colors = [...colors, { index: i + 1, isLocked: false, hex: color }]
+            colors = [...colors, { isLocked: false, hex: color }]
         }
         return colors
     }
@@ -150,9 +167,9 @@ function findMediumColor(color1, color2) {
     const rgb2 = hexToRgb(color2);
 
     const mediumColor = {
-      r: Math.floor((rgb1.r + rgb2.r) / 2),
-      g: Math.floor((rgb1.g + rgb2.g) / 2),
-      b: Math.floor((rgb1.b + rgb2.b) / 2),
+        r: Math.floor((rgb1.r + rgb2.r) / 2),
+        g: Math.floor((rgb1.g + rgb2.g) / 2),
+        b: Math.floor((rgb1.b + rgb2.b) / 2),
     };
 
     return rgbToHex(mediumColor.r, mediumColor.g, mediumColor.b);
