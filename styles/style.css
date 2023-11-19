@@ -39,6 +39,7 @@ html, body {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    border: solid 2px transparent;
 }
 
 .colorHex:hover {
@@ -47,6 +48,14 @@ html, body {
 
 .colorHex:active {
     background-color: #000000CC;
+}
+
+.copied {
+    border: solid 2px green;
+    background-color: #00990055;
+    box-shadow: 0 0 10px #55FF55;
+    text-shadow: 0 0 5px white;
+    box-sizing: border-box;
 }
 
 .colorValue {
@@ -63,6 +72,7 @@ html, body {
     font-weight: bold;
     border-radius: 10px;
     padding: 10px;
+    box-sizing: border-box;
 
     user-drag: none;
     user-select: none;
