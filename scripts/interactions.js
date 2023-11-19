@@ -23,7 +23,14 @@ window.colorHistoryID = -1;
 function updateColors() {
     let i = 0;
     let newContent = "";
+    let newUrl = window.location.href.substring(0, window.location.href.indexOf("?")) + "?";
     for (const color of window.pageColors) {
+        if (i > 0)
+            newUrl += "-";
+        newUrl += color.hex;
+        if (color.isLocked)
+            newUrl += "L";
+
         let midColor = "";
         if (i < window.pageColors.length - 1)
             midColor = findMediumColor(color.hex, window.pageColors[i + 1].hex)
@@ -47,6 +54,7 @@ function updateColors() {
             newContent += "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"></div>";
         i++
     }
+    window.history.pushState("Generating colors", "C.O.L.O.R.S", newUrl);
     document.getElementById("colors").innerHTML = newContent;
 }
 
@@ -79,6 +87,7 @@ function lockColor(object, color) {
         if (element.hex == color)
             window.pageColors[key].isLocked = !window.pageColors[key].isLocked;
     }
+    updateColors();
 }
 
 function deleteColor(color) {
@@ -97,14 +106,34 @@ function deleteColor(color) {
     saveColorsToHistory()
 }
 
-generateNewColors(true);
+if (window.location.href.indexOf("?") > -1) {
+    let colorsString = window.location.href;
+    colorsString = colorsString.slice(colorsString.indexOf('?') + 1)
+    let colorsStringsArr = colorsString.split("#").join("").split("-");
+    let newColors = [];
+    for (const colorString of colorsStringsArr) {
+        let color = colorString;
+        let locked = false;
+        if (colorString.toUpperCase().endsWith("L")) {
+            color = color.slice(0, -1);
+            locked = true;
+        }
+        newColors = [...newColors, { isLocked: locked, hex: color }]
+    }
+    window.pageColors = newColors;
+    window.numberOfColors = window.pageColors.length;
+    updateColors();
+    saveColorsToHistory()
+}
+else
+    generateNewColors(true);
 
 function saveColorsToHistory() {
     window.colorHistoryID++;
     if (window.colorHistoryID < window.colorsHistory.length)
         window.colorsHistory[window.colorHistoryID] = window.pageColors;
     else
-        window.colorsHistory = [...window.colorsHistory, JSON.parse(JSON.stringify(window.pageColors)) ];
+        window.colorsHistory = [...window.colorsHistory, JSON.parse(JSON.stringify(window.pageColors))];
 }
 
 function loadColorsFromHistory() {

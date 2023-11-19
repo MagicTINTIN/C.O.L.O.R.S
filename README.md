@@ -1,4 +1,4 @@
-# C.O.L.O.R
+# C.O.L.O.R.S
 Colors Output Layout Of Random Schemes
 ---
 Generate your own color scheme quickly !
