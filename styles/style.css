@@ -43,6 +43,10 @@ html, body {
     background-color: #000000CC;
 }
 
+.colorValue {
+    margin: 10px;
+}
+
 @media screen and (orientation:landscape) {
     #colors {
         flex-direction: row;

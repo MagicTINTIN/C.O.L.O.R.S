@@ -22,5 +22,6 @@ function copytcb(tocopy) {
 
 
 function copied(object) {
-    object.styles.background = "#00990055";
+    object.style.background = "#00990055";
+    object.style.border = "solid 2px green"
 }
