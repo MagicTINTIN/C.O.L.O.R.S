@@ -55,13 +55,14 @@ function updateColors() {
         i++
     }
     window.history.pushState("Generating colors", "C.O.L.O.R.S", newUrl);
+    updateButtons();
     document.getElementById("colors").innerHTML = newContent;
 }
 
 function generateNewColors(first = false) {
     window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
-    updateColors()
-    saveColorsToHistory()
+    saveColorsToHistory();
+    updateColors();
 }
 
 function genNewColor(index, newcolor) {
@@ -75,8 +76,8 @@ function genNewColor(index, newcolor) {
     }
     window.pageColors = newColors;
     window.numberOfColors++;
+    saveColorsToHistory();
     updateColors();
-    saveColorsToHistory()
 }
 
 function lockColor(object, color) {
@@ -102,8 +103,8 @@ function deleteColor(color) {
 
     window.numberOfColors--;
     window.pageColors = newColors;
+    saveColorsToHistory();
     updateColors();
-    saveColorsToHistory()
 }
 
 if (window.location.href.indexOf("?") > -1) {
@@ -122,8 +123,8 @@ if (window.location.href.indexOf("?") > -1) {
     }
     window.pageColors = newColors;
     window.numberOfColors = window.pageColors.length;
+    saveColorsToHistory();
     updateColors();
-    saveColorsToHistory()
 }
 else
     generateNewColors(true);
@@ -157,5 +158,27 @@ function next() {
     if (window.colorHistoryID < window.colorsHistory.length - 1) {
         window.colorHistoryID++;
         loadColorsFromHistory()
+    }
+}
+
+function updateButtons() {
+    const prev = document.getElementById("previousButton");
+    if (window.colorHistoryID > 0) {
+        prev.classList.add("btnIcon");
+        prev.classList.remove("btnDisabled");
+    }
+    else {
+        prev.classList.remove("btnIcon");
+        prev.classList.add("btnDisabled");
+    }
+
+    const next = document.getElementById("nextButton");
+    if (window.colorHistoryID < window.colorsHistory.length - 1) {
+        next.classList.add("btnIcon");
+        next.classList.remove("btnDisabled");
+    }
+    else {
+        next.classList.remove("btnIcon");
+        next.classList.add("btnDisabled");
     }
 }

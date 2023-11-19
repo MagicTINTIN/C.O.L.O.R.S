@@ -210,6 +210,10 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    padding: 5px;
+    padding-left: 2vh;
+    padding-right: 3vh;
 }
 
 .navButton {
@@ -233,14 +237,55 @@ body {
     color: black;
 }
 
-.navButton:hover {
+.btnIcon {
+    transform: scale(1);
+    transition: all .3s;
+}
+
+.btnIcon:hover {
     text-shadow: 0 0 5px gray;
     transform: scale(1.2);
 }
 
-.navButton:active {
+.btnIcon:active {
     text-shadow: 0 0 5px gray;
     transform: scale(1.1);
+}
+
+.btnDisabled {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    transition: all .3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    color: gray;
+}
+
+.btnDescription {
+    font-size: x-small;
+    color: gray;
+    text-align: center;
+}
+
+.btnKey {
+    border: solid 1px gray;
+    padding: 1px;
+    border-radius: 3px;
+    color: gray;
+    font-size: xx-small;
+    text-align: center;
 }
 
 @media screen and (orientation:landscape) {
@@ -281,9 +326,6 @@ body {
         border-radius: 3.5vh;
         left: 25vw;
         bottom: 30px;
-        padding: 5px;
-        padding-left: 1.5vh;
-        padding-right: 1.5vh;
         box-sizing: border-box;
     }
 
@@ -329,9 +371,6 @@ body {
         border-radius: 2.5vh;
         left: 5vw;
         bottom: 0px;
-        padding: 5px;
-        padding-left: 1.5vh;
-        padding-right: 1.5vh;
         box-sizing: border-box;
     }
 
