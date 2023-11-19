@@ -2,12 +2,23 @@ window.MAX_COLORS = 30;
 window.displayNames = true;
 
 document.getElementById("body").addEventListener("keyup", (e) => {
+    //console.log(e, e.key);
+    if (e.key == "ArrowUp" || e.key == "z")
+        document.getElementById("panelControl").style.transform = "translateY(0px)";
+    if (e.key == "ArrowDown" || e.key == "s")
+        document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
+    if (e.key == "ArrowLeft" || e.key == "q")
+        previous();
+    if (e.key == "ArrowRight" || e.key == "d")
+        next();
     if (e.key === " ")
         generateNewColors();
 });
 
 window.pageColors = [];
 window.numberOfColors = 5;
+window.colorsHistory = [];
+window.colorHistoryID = 0;
 
 function updateColors() {
     let i = 0;
@@ -75,7 +86,7 @@ function deleteColor(color) {
     for (const key in window.pageColors) {
         const element = window.pageColors[key];
         if (element.hex != color)
-            newColors = [ ...newColors, window.pageColors[key] ];
+            newColors = [...newColors, window.pageColors[key]];
     }
 
     window.numberOfColors--;
@@ -84,3 +95,15 @@ function deleteColor(color) {
 }
 
 generateNewColors(true);
+
+function closePanel() {
+    document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
+}
+
+function previous() {
+    
+}
+
+function next() {
+    
+}
