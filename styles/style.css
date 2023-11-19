@@ -201,6 +201,7 @@ body {
 }
 
 #panelControl {
+    box-shadow: 5px 5px 10px #00000099;
     background-color: white;
     position: fixed;
 

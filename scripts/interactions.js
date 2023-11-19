@@ -18,7 +18,7 @@ document.getElementById("body").addEventListener("keyup", (e) => {
 window.pageColors = [];
 window.numberOfColors = 5;
 window.colorsHistory = [];
-window.colorHistoryID = 0;
+window.colorHistoryID = -1;
 
 function updateColors() {
     let i = 0;
@@ -53,6 +53,7 @@ function updateColors() {
 function generateNewColors(first = false) {
     window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
     updateColors()
+    saveColorsToHistory()
 }
 
 function genNewColor(index, newcolor) {
@@ -67,6 +68,7 @@ function genNewColor(index, newcolor) {
     window.pageColors = newColors;
     window.numberOfColors++;
     updateColors();
+    saveColorsToHistory()
 }
 
 function lockColor(object, color) {
@@ -92,18 +94,39 @@ function deleteColor(color) {
     window.numberOfColors--;
     window.pageColors = newColors;
     updateColors();
+    saveColorsToHistory()
 }
 
 generateNewColors(true);
+
+function saveColorsToHistory() {
+    window.colorHistoryID++;
+    if (window.colorHistoryID < window.colorsHistory.length)
+        window.colorsHistory[window.colorHistoryID] = window.pageColors;
+    else
+        window.colorsHistory = [...window.colorsHistory, JSON.parse(JSON.stringify(window.pageColors)) ];
+}
+
+function loadColorsFromHistory() {
+    window.pageColors = window.colorsHistory[window.colorHistoryID];
+    window.numberOfColors = window.pageColors.length;
+    updateColors();
+}
 
 function closePanel() {
     document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
 }
 
 function previous() {
-    
+    if (window.colorHistoryID > 0) {
+        window.colorHistoryID--;
+        loadColorsFromHistory()
+    }
 }
 
 function next() {
-    
+    if (window.colorHistoryID < window.colorsHistory.length - 1) {
+        window.colorHistoryID++;
+        loadColorsFromHistory()
+    }
 }
