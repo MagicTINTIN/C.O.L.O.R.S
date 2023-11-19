@@ -39,19 +39,19 @@ function updateColors() {
         let colorRGB = hexToRgb(color.hex);
 
         if (window.numberOfColors <= window.MAX_COLORS)
-            newContent += `<div class="color" style="background:#${color.hex}; width:calc( ${100 / numberOfColors}vw - 10px ); height:calc( ${100 / numberOfColors}vh - 10px ); color:${isColorBright(color.hex) ? "black" : "white"};">`;
+            newContent += `<div id="color${color.hex}${color.isLocked ? "L" : ""}" class="color" style="background:#${color.hex}; width:calc( ${100 / numberOfColors}vw - 10px ); height:calc( ${100 / numberOfColors}vh - 10px ); color:${isColorBright(color.hex) ? "black" : "white"};">`;
         else
-            newContent += `<div class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
-        newContent += `<span class="colorName">${getClosestColor(color.hex)}</span>
-        <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
-        <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
-        ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer"><span class="delete" onclick="deleteColor('${color.hex}')" ontouchstart="deleteColor('${color.hex}')">×</span></span>`}
-        <span class="rgbValues">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
-        <span class="colorValue">${color.hex}</span>
+            newContent += `<div id="color${color.hex}${color.isLocked ? "L" : ""}" class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
+        newContent += `<span class="colorName static">${getClosestColor(color.hex)}</span>
+        <span class="colorHex static" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
+        <span class="lock ${color.isLocked ? "locked" : "unlocked"} static" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
+        ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer static"><span class="delete static" onclick="deleteColor('${color.hex}')" ontouchstart="deleteColor('${color.hex}')">×</span></span>`}
+        <span class="rgbValues static">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
+        <span class="colorValue static">${color.hex}</span>
         </div>`;
 
         if (window.numberOfColors <= window.MAX_COLORS)
-            newContent += "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"></div>";
+            newContent += "<div class=\"addBetween static\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"></div>";
         i++
     }
     window.history.pushState("Generating colors", "C.O.L.O.R.S", newUrl);

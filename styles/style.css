@@ -336,6 +336,10 @@ body {
 }
 
 @media screen and (orientation:portrait) {
+    .btnKey {
+        display: none;
+    }
+
     #colors {
         flex-direction: column;
     }
