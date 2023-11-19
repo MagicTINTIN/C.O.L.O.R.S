@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     background-color: black;
     padding: 0;
     margin: 0;
@@ -59,12 +60,18 @@ html, body {
     box-sizing: border-box;
 }
 
-.colorInfo {
-    margin: 10px;
+.colorName {
     font-size: small;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    text-align: left;
+    padding: 0;
+    margin: 10px;
+}
+
+.colorValue {
+    font-size: small;
+    text-align: right;
+    padding: 0;
+    margin: 10px;
 }
 
 .lock {
@@ -120,6 +127,7 @@ html, body {
 .rgbValues {
     margin: auto;
     text-align: center;
+    white-space: pre;
 }
 
 .addBetween {
@@ -146,7 +154,7 @@ html, body {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    
+
     box-sizing: border-box;
 }
 
@@ -164,6 +172,7 @@ html, body {
     #colors {
         flex-direction: row;
     }
+
     .color {
         min-height: 100vh;
         flex-direction: column;
@@ -192,6 +201,7 @@ html, body {
     #colors {
         flex-direction: column;
     }
+
     .color {
         min-width: 100vw;
         flex-direction: row;

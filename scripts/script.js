@@ -27,3 +27,17 @@ function copied(object) {
         object.classList.remove('copied');
     }, 2000);
 }
+
+function formatNumber(val, max, charToFill=' ')
+{
+    let output = "";
+	nb0max = Math.floor(Math.log10(Math.max(1, max)));
+	nb0val = Math.floor(Math.log10(Math.max(1, val)));
+    
+	for (i = 0; i < (nb0max - nb0val); i++)
+	{
+		output += charToFill;
+	}
+	output += val;
+	return output;
+}
