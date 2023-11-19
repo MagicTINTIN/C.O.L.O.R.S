@@ -189,12 +189,12 @@ body {
 }
 
 .delete:hover {
-    text-shadow: 0 0 5px red;
+    text-shadow: 0 0 5px gray;
     transform: scale(1.5);
 }
 
 .delete:active {
-    text-shadow: 0 0 5px red;
+    text-shadow: 0 0 5px gray;
     transform: scale(1.2);
 }
 

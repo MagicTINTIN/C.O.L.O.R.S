@@ -27,7 +27,7 @@ function updateColors() {
         newContent += `<span class="colorName">${getClosestColor(color.hex)}</span>
         <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
         <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
-        <span class="deleteContainer"><span class="delete" onclick="deleteColor(this, '${color.hex}')" ontouchstart="deleteColor(this, '${color.hex}')">×</span></span>
+        ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer"><span class="delete" onclick="deleteColor('${color.hex}')" ontouchstart="deleteColor('${color.hex}')">×</span></span>`}
         <span class="rgbValues">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
         <span class="colorValue">${color.hex}</span>
         </div>`;
@@ -66,6 +66,21 @@ function lockColor(object, color) {
         if (element.hex == color)
             window.pageColors[key].isLocked = !window.pageColors[key].isLocked;
     }
+}
+
+function deleteColor(color) {
+    if (window.numberOfColors <= 2)
+        return;
+    newColors = []
+    for (const key in window.pageColors) {
+        const element = window.pageColors[key];
+        if (element.hex != color)
+            newColors = [ ...newColors, window.pageColors[key] ];
+    }
+
+    window.numberOfColors--;
+    window.pageColors = newColors;
+    updateColors();
 }
 
 generateNewColors(true);
