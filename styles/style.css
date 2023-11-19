@@ -168,6 +168,36 @@ body {
     border-bottom: none;
 }
 
+.deleteContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.delete {
+    text-align: center;
+    font-size: xx-large;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    transition: all .3s;
+}
+
+.delete:hover {
+    text-shadow: 0 0 5px red;
+    transform: scale(1.5);
+}
+
+.delete:active {
+    text-shadow: 0 0 5px red;
+    transform: scale(1.2);
+}
+
 @media screen and (orientation:landscape) {
     #colors {
         flex-direction: row;

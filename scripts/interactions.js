@@ -27,6 +27,7 @@ function updateColors() {
         newContent += `<span class="colorName">${getClosestColor(color.hex)}</span>
         <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
         <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
+        <span class="deleteContainer"><span class="delete" onclick="deleteColor(this, '${color.hex}')" ontouchstart="deleteColor(this, '${color.hex}')">×</span></span>
         <span class="rgbValues">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
         <span class="colorValue">${color.hex}</span>
         </div>`;
