@@ -170,13 +170,13 @@ body {
 
 .deleteContainer {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
 }
 
 .delete {
     text-align: center;
     font-size: xx-large;
+    font-weight: normal;
 
     user-drag: none;
     user-select: none;
@@ -186,6 +186,8 @@ body {
     -ms-user-select: none;
 
     transition: all .3s;
+
+    color: black;
 }
 
 .delete:hover {
@@ -196,6 +198,48 @@ body {
 .delete:active {
     text-shadow: 0 0 5px gray;
     transform: scale(1.2);
+}
+
+#panelControl {
+    background-color: white;
+    position: fixed;
+
+    transition: all .15s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navButton {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    transition: all .3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    color: black;
+}
+
+.navButton:hover {
+    text-shadow: 0 0 5px gray;
+    transform: scale(1.2);
+}
+
+.navButton:active {
+    text-shadow: 0 0 5px gray;
+    transform: scale(1.1);
 }
 
 @media screen and (orientation:landscape) {
@@ -225,6 +269,27 @@ body {
         border-bottom: none;
         min-height: 100vh;
     }
+
+    .deleteContainer {
+        flex-direction: row;
+    }
+
+    #panelControl {
+        width: 50vw;
+        height: 7vh;
+        border-radius: 3.5vh;
+        left: 25vw;
+        bottom: 30px;
+        padding: 5px;
+        padding-left: 1.5vh;
+        padding-right: 1.5vh;
+        box-sizing: border-box;
+    }
+
+    #logoNavBar {
+        width: calc(7vh - 10px);
+        height: calc(7vh - 10px);
+    }
 }
 
 @media screen and (orientation:portrait) {
@@ -251,6 +316,27 @@ body {
     .addBetween:active {
         border-right: none;
         border-left: none;
+    }
+
+    .deleteContainer {
+        flex-direction: column;
+    }
+
+    #panelControl {
+        width: 90vw;
+        height: 5vh;
+        border-radius: 2.5vh;
+        left: 5vw;
+        bottom: 0px;
+        padding: 5px;
+        padding-left: 1.5vh;
+        padding-right: 1.5vh;
+        box-sizing: border-box;
+    }
+
+    #logoNavBar {
+        width: calc(5vh - 10px);
+        height: calc(5vh - 10px);
     }
 }
 
