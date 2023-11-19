@@ -1,4 +1,5 @@
-MAX_COLORS = 30;
+window.MAX_COLORS = 30;
+window.displayNames = true;
 
 document.getElementById("body").addEventListener("keyup", (e) => {
     if (e.key === " ")
@@ -19,17 +20,17 @@ function updateColors() {
             midColor = "#" + newColor()
         let colorRGB = hexToRgb(color.hex);
 
-        if (window.numberOfColors <= MAX_COLORS)
+        if (window.numberOfColors <= window.MAX_COLORS)
             newContent += `<div class="color" style="background:#${color.hex}; width:calc( ${100 / numberOfColors}vw - 10px ); height:calc( ${100 / numberOfColors}vh - 10px ); color:${isColorBright(color.hex) ? "black" : "white"};">`;
         else
             newContent += `<div class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
-        newContent += `<span class="colorValue">${color.hex}</span>
+        newContent += `<div class="colorInfo"><span class="colorValue">${color.hex}</span><span class="colorName">${getClosestColor(color.hex)}</span></div>
         <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
         <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
         <span class="rgbValues">R: ${colorRGB.r}<br>G: ${colorRGB.g}<br>B: ${colorRGB.b}</span>
         </div>`;
 
-        if (window.numberOfColors <= MAX_COLORS)
+        if (window.numberOfColors <= window.MAX_COLORS)
             newContent += "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"></div>";
         i++
     }
