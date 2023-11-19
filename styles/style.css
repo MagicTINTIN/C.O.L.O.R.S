@@ -1,4 +1,5 @@
 html, body {
+    background-color: black;
     padding: 0;
     margin: 0;
     width: 100vw;
@@ -121,7 +122,6 @@ html, body {
 .addBetween {
     font-weight: bold;
     overflow: hidden;
-    font-size: 4px;
 
     width: 10px;
     height: 10px;
@@ -131,10 +131,7 @@ html, body {
     justify-content: space-around;
     text-align: center;
 
-    box-sizing: border-box;
     border: solid 3px transparent;
-    border-top: none;
-    border-bottom: none;
 
     cursor: pointer;
 
@@ -152,8 +149,6 @@ html, body {
 
 .addBetween:hover {
     border: solid 3px white;
-    border-top: none;
-    border-bottom: none;
 }
 
 .addBetween:active {
@@ -172,6 +167,20 @@ html, body {
     }
 
     .addBetween {
+        border-top: none;
+        border-bottom: none;
+        min-height: 100vh;
+    }
+
+    .addBetween:hover {
+        border-top: none;
+        border-bottom: none;
+        min-height: 100vh;
+    }
+
+    .addBetween:active {
+        border-top: none;
+        border-bottom: none;
         min-height: 100vh;
     }
 }
@@ -179,7 +188,6 @@ html, body {
 @media screen and (orientation:portrait) {
     #colors {
         flex-direction: column;
-    flex-direction: column;
     }
     .color {
         min-width: 100vw;
@@ -187,6 +195,59 @@ html, body {
     }
 
     .addBetween {
-        min-width: 100vh;
+        border-right: none;
+        border-left: none;
+        min-width: 100vw;
     }
+
+    .addBetween:hover {
+        border-right: none;
+        border-left: none;
+    }
+
+    .addBetween:active {
+        border-right: none;
+        border-left: none;
+    }
+}
+
+/* ----------- SCROLLBAR ----------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #00000000;
+}
+
+::-webkit-scrollbar:hover {
+    width: 8px;
+    height: 8px;
+    background: #00000000;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 8px;
+    height: 8px;
+    background-color: #00000000;
+    border: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    height: 8px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+    background-color: white;
+    transition: all 1s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: gray;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: black;
 }

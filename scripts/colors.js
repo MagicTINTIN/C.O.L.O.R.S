@@ -1,73 +1,30 @@
-document.getElementById("body").addEventListener("keyup", (e) => {
-    if (e.key === " ")
-        generateNewColors();
-    //console.log(`Key "${e.key}" released [event: keyup]`, e);
-});
-
-window.pageColors = [];
-window.numberOfColors = 5;
-
-function updateColors() {
-    let i = 0;
-    let newContent = "";
-    for (const color of window.pageColors) {
-        let midColor = "";
-        if (i < window.pageColors.length - 1)
-            midColor = findMediumColor(color.hex, window.pageColors[i + 1].hex)
-        let colorRGB = hexToRgb(color.hex);
-        newContent += `<div class="color" style="background:#${color.hex}; width:calc( ${100 / numberOfColors}vw - 5px ); height:calc( ${100 / numberOfColors}vh - 5px ); color:${isColorBright(color.hex) ? "black" : "white"};">
-        <span class="colorValue">${color.hex}</span>
-        <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
-        <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
-        <span class="rgbValues">R: ${colorRGB.r}<br>G: ${colorRGB.g}<br>B: ${colorRGB.b}</span>
-        </div>
-        ${(i < window.pageColors.length - 1) ? "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\" ontouchstart=\"genNewColor(" + i + ", '" + midColor + "')\"><span>+</span></div>" : ""}`;
-        i++
+function newColor() {
+    let color = ''
+    for (let i = 0; i < 6; i++) {
+        let randomVal = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
+        if (randomVal == 10) {
+            randomVal = 'A'
+        } else if (randomVal === 11) {
+            randomVal = 'B'
+        } else if (randomVal === 12) {
+            randomVal = 'C'
+        } else if (randomVal === 13) {
+            randomVal = 'D'
+        } else if (randomVal === 14) {
+            randomVal = 'E'
+        } else if (randomVal === 15) {
+            randomVal = 'F'
+        }
+        color = color + randomVal
     }
-    document.getElementById("colors").innerHTML = newContent;
-}
-
-function generateNewColors(first = false) {
-    window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
-    updateColors()
-}
-
-function genNewColor(index, newcolor) {
-    let newColors = []
-    let i = 0;
-    for (const color of window.pageColors) {
-        newColors = [...newColors, color];
-        if (i == index)
-            newColors = [...newColors, { isLocked: false, hex: newcolor.replace("#","") }];
-        i++;
-    }
-    window.pageColors = newColors;
-    window.numberOfColors++;
-    updateColors();
+    return color
 }
 
 function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
     if (isFirst) {
         let colors = []
         for (let i = 0; i < colorNumber; i++) {
-            let color = ''
-            for (let i = 0; i < 6; i++) {
-                let randomVal = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
-                if (randomVal == 10) {
-                    randomVal = 'A'
-                } else if (randomVal === 11) {
-                    randomVal = 'B'
-                } else if (randomVal === 12) {
-                    randomVal = 'C'
-                } else if (randomVal === 13) {
-                    randomVal = 'D'
-                } else if (randomVal === 14) {
-                    randomVal = 'E'
-                } else if (randomVal === 15) {
-                    randomVal = 'F'
-                }
-                color = color + randomVal
-            }
+            let color = newColor()
             colors = [...colors, { isLocked: false, hex: color }]
         }
         return colors
@@ -76,24 +33,7 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
         let colors = []
         existingColors.map((col) => {
             if (col.isLocked === false) {
-                let color = ''
-                for (let i = 0; i < 6; i++) {
-                    let randomVal = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
-                    if (randomVal == 10) {
-                        randomVal = 'A'
-                    } else if (randomVal === 11) {
-                        randomVal = 'B'
-                    } else if (randomVal === 12) {
-                        randomVal = 'C'
-                    } else if (randomVal === 13) {
-                        randomVal = 'D'
-                    } else if (randomVal === 14) {
-                        randomVal = 'E'
-                    } else if (randomVal === 15) {
-                        randomVal = 'F'
-                    }
-                    color = color + randomVal
-                }
+                let color = newColor()
                 col.hex = color
                 colors = [...colors, col]
             }
@@ -129,7 +69,6 @@ function hexToRgb(hex) {
     } : null;
 }
 
-
 function isColorBright(hexColor, mode = 1) {
     let color = hexToRgb(hexColor);
     const r = color.r;
@@ -152,16 +91,6 @@ function isColorBright(hexColor, mode = 1) {
     return false;
 }
 
-function lockColor(object, color) {
-    object.classList.toggle('locked');
-    object.classList.toggle('unlocked');
-    for (const key in window.pageColors) {
-        const element = window.pageColors[key];
-        if (element.hex == color)
-            window.pageColors[key].isLocked = !window.pageColors[key].isLocked;
-    }
-}
-
 function findMediumColor(color1, color2) {
     const rgb1 = hexToRgb(color1);
     const rgb2 = hexToRgb(color2);
@@ -174,5 +103,3 @@ function findMediumColor(color1, color2) {
 
     return rgbToHex(mediumColor.r, mediumColor.g, mediumColor.b);
 }
-
-generateNewColors(true);
