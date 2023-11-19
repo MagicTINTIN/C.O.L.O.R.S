@@ -14,7 +14,6 @@ html, body {
 
 .color {
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     font-weight: bold;
 }
@@ -33,6 +32,13 @@ html, body {
     border-radius: 10px;
 
     transition: all .3s;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .colorHex:hover {
@@ -45,6 +51,61 @@ html, body {
 
 .colorValue {
     margin: 10px;
+    font-size: small;
+}
+
+.lock {
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    transition: all .3s;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.unlocked {
+    border: solid 2px black;
+    background-color: #00000077;
+}
+
+.unlocked:hover {
+    background-color: #00000055;
+}
+
+.unlocked:active {
+    background-color: #000000CC;
+}
+
+
+.locked {
+    border: solid 2px blue;
+    background-color: #0000FF77;
+
+    box-shadow: 0 0 10px #5555FF;
+    text-shadow: 0 0 5px white;
+}
+
+.locked:hover {
+    background-color: #0000FF55;
+}
+
+.locked:active {
+    background-color: #0000FFCC;
+}
+
+
+.rgbValues {
+    margin: auto;
+    text-align: center;
 }
 
 @media screen and (orientation:landscape) {
@@ -53,14 +114,17 @@ html, body {
     }
     .color {
         min-height: 100vh;
+        flex-direction: column;
     }
 }
 
 @media screen and (orientation:portrait) {
     #colors {
         flex-direction: column;
+    flex-direction: column;
     }
     .color {
         min-width: 100vw;
+        flex-direction: row;
     }
 }

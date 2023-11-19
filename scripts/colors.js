@@ -12,9 +12,12 @@ function generateNewColors(first = false) {
     let newContent = "";
     window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
     for (const color of window.pageColors) {
+        let colorRGB = hexToRgb(color.hex);
         newContent += `<div class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">
-        <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
         <span class="colorValue">${color.hex}</span>
+        <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
+        <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
+        <span class="rgbValues">R: ${colorRGB.r}<br>G: ${colorRGB.g}<br>B: ${colorRGB.b}</span>
         </div>`;
     }
     document.getElementById("colors").innerHTML = newContent;
@@ -42,14 +45,14 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
                 }
                 color = color + randomVal
             }
-            colors = [...colors, { index: i + 1, isBlocked: false, hex: color }]
+            colors = [...colors, { index: i + 1, isLocked: false, hex: color }]
         }
         return colors
     }
     if (isFirst === false) {
         let colors = []
         existingColors.map((col) => {
-            if (col.isBlocked === false) {
+            if (col.isLocked === false) {
                 let color = ''
                 for (let i = 0; i < 6; i++) {
                     let randomVal = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
@@ -71,7 +74,7 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
                 col.hex = color
                 colors = [...colors, col]
             }
-            if (col.isBlocked === true) {
+            if (col.isLocked === true) {
                 colors = [...colors, col]
             }
         })
@@ -124,6 +127,16 @@ function isColorBright(hexColor, mode = 1) {
         return brightness > 128;
 
     return false;
+}
+
+function lockColor(object, color) {
+    object.classList.toggle('locked');
+    object.classList.toggle('unlocked');
+    for (const key in window.pageColors) {
+        const element = window.pageColors[key];
+        if (element.hex == color)
+            window.pageColors[key].isLocked = !window.pageColors[key].isLocked;
+    }
 }
 
 generateNewColors(true);
