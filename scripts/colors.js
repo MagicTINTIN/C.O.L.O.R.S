@@ -11,14 +11,20 @@ function generateNewColors(first = false) {
     console.log("NOT IMPLEMENTED YET");
     let newContent = "";
     window.pageColors = colorsGenerator(first, window.numberOfColors, window.pageColors);
+    let i = 0;
     for (const color of window.pageColors) {
+        let midColor = "";
+        if (i < window.pageColors.length - 1)
+            midColor = findMediumColor(color.hex, window.pageColors[i + 1].hex)
         let colorRGB = hexToRgb(color.hex);
-        newContent += `<div class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">
+        newContent += `<div class="color" style="background:#${color.hex}; width:calc( ${100 / numberOfColors}vw - 5px ); height:calc( ${100 / numberOfColors}vh - 5px ); color:${isColorBright(color.hex) ? "black" : "white"};">
         <span class="colorValue">${color.hex}</span>
         <span class="colorHex" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
         <span class="lock ${color.isLocked ? "locked" : "unlocked"}" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
         <span class="rgbValues">R: ${colorRGB.r}<br>G: ${colorRGB.g}<br>B: ${colorRGB.b}</span>
-        </div>`;
+        </div>
+        ${(i < window.pageColors.length - 1) ? "<div class=\"addBetween\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor("+ i + ", '" + midColor + "')\" ontouchstart=\"genNewColor("+ i + ", '" + midColor + "')\"><span>+</span></div>" : ""}`;
+        i++
     }
     document.getElementById("colors").innerHTML = newContent;
 }
@@ -137,6 +143,19 @@ function lockColor(object, color) {
         if (element.hex == color)
             window.pageColors[key].isLocked = !window.pageColors[key].isLocked;
     }
+}
+
+function findMediumColor(color1, color2) {
+    const rgb1 = hexToRgb(color1);
+    const rgb2 = hexToRgb(color2);
+
+    const mediumColor = {
+      r: Math.floor((rgb1.r + rgb2.r) / 2),
+      g: Math.floor((rgb1.g + rgb2.g) / 2),
+      b: Math.floor((rgb1.b + rgb2.b) / 2),
+    };
+
+    return rgbToHex(mediumColor.r, mediumColor.g, mediumColor.b);
 }
 
 generateNewColors(true);

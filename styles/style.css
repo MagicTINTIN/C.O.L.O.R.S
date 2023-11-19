@@ -118,6 +118,44 @@ html, body {
     text-align: center;
 }
 
+.addBetween {
+    font-weight: bold;
+    overflow: hidden;
+    font-size: 4px;
+
+    width: 10px;
+    height: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+    box-sizing: border-box;
+    border: solid 3px transparent;
+
+    cursor: pointer;
+
+    transition: all .3s;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    
+    box-sizing: border-box;
+}
+
+.addBetween:hover {
+    border: solid 3px white;
+}
+
+.addBetween:active {
+    border: solid 3px black;
+}
+
 @media screen and (orientation:landscape) {
     #colors {
         flex-direction: row;
@@ -125,6 +163,10 @@ html, body {
     .color {
         min-height: 100vh;
         flex-direction: column;
+    }
+
+    .addBetween {
+        min-height: 100vh;
     }
 }
 
@@ -136,5 +178,9 @@ html, body {
     .color {
         min-width: 100vw;
         flex-direction: row;
+    }
+
+    .addBetween {
+        min-width: 100vh;
     }
 }
