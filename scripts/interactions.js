@@ -2,7 +2,7 @@ window.MAX_COLORS = 30;
 window.displayNames = true;
 
 document.getElementById("body").addEventListener("keyup", (e) => {
-    console.log(e, e.key);
+    //console.log(e, e.key);
     if (e.key == "ArrowUp")
         openPanel()
     if (e.key == "ArrowDown")
@@ -271,5 +271,15 @@ function toggleModifySelected() {
 }
 
 function applyModifiers(hFactor, sFactor, vFactor) {
-    
+    newColors = []
+    for (const key in window.pageColors) {
+        const element = window.pageColors[key];
+        if (element.isLocked || !window.modifyOnlySelected)
+            newColors = [...newColors, { isLocked: element.isLocked, hex: modifyHSVColor(element.hex, hFactor, sFactor, vFactor) }];
+        else
+            newColors = [...newColors, element];
+    }
+    window.pageColors = newColors;
+    saveColorsToHistory();
+    updateColors();
 }

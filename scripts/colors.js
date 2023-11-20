@@ -112,9 +112,9 @@ function isValidHexColor(hex) {
 
 RGBtoHSV = function (color) {
     var r, g, b, h, s, v;
-    r = color.r;
-    g = color.g;
-    b = color.b;
+    r = color.r / 255;
+    g = color.g / 255;
+    b = color.b / 255;
     min = Math.min(r, g, b);
     max = Math.max(r, g, b);
 
@@ -127,7 +127,7 @@ RGBtoHSV = function (color) {
         // r = g = b = 0        // s = 0, v is undefined
         s = 0;
         h = -1;
-        return [h, s, undefined];
+        return { h: 0, s: 0, v: 0 };
     }
     if (r === max)
         h = (g - b) / delta;      // between yellow & magenta
@@ -152,7 +152,7 @@ HSVtoRGB = function (color) {
     if (s === 0) {
         // achromatic (grey)
         r = g = b = v;
-        return [r, g, b];
+        return { r: parseInt(r * 255), g: parseInt(g * 255), b: parseInt(b * 255) };
     }
     h /= 60;            // sector 0 to 5
     i = Math.floor(h);
@@ -192,21 +192,21 @@ HSVtoRGB = function (color) {
             b = q;
             break;
     }
-    return { r: parseInt(r), g: parseInt(g), b: parseInt(b) };
+    return { r: parseInt(r * 255), g: parseInt(g * 255), b: parseInt(b * 255) };
 }
 
 function rotateColor(hsvColor, factor) {
-    hsvColor.h = (hsvValues.h + factor) % 360;
+    hsvColor.h = (hsvColor.h + factor) % 360;
     return hsvColor;
 }
 
 function saturateColor(hsvColor, factor) {
-    hsvColor.s = Math.min(Math.max(hsvValues.s + factor, 0), 1);
+    hsvColor.s = Math.min(Math.max(hsvColor.s + factor, 0), 1);
     return hsvColor;
 }
 
 function lightenColor(hsvColor, factor) {
-    hsvColor.v = Math.min(Math.max(hsvValues.v + factor, 0), 1);
+    hsvColor.v = Math.min(Math.max(hsvColor.v + factor, 0), 1);
     return hsvColor;
 }
 

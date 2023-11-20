@@ -475,7 +475,6 @@ body {
         font-size: calc(7vh - 10px);
     }
 
-
     .labelValue {
         font-size: min( max( calc(7vh - 20px), 6vh), 5vw );
         width: min( max( calc(7vh - 20px), 6vh), 5vw );
