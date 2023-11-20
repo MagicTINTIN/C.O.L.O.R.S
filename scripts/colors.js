@@ -109,3 +109,118 @@ function isValidHexColor(hex) {
     const hexRegex = /^([0-9a-fA-F]{6})$/; //[0-9a-fA-F]{3}| but I don't want the 3th version
     return hexRegex.test(checkHex);
 }
+
+RGBtoHSV = function (color) {
+    var r, g, b, h, s, v;
+    r = color.r;
+    g = color.g;
+    b = color.b;
+    min = Math.min(r, g, b);
+    max = Math.max(r, g, b);
+
+
+    v = max;
+    delta = max - min;
+    if (max != 0)
+        s = delta / max;        // s
+    else {
+        // r = g = b = 0        // s = 0, v is undefined
+        s = 0;
+        h = -1;
+        return [h, s, undefined];
+    }
+    if (r === max)
+        h = (g - b) / delta;      // between yellow & magenta
+    else if (g === max)
+        h = 2 + (b - r) / delta;  // between cyan & yellow
+    else
+        h = 4 + (r - g) / delta;  // between magenta & cyan
+    h *= 60;                // degrees
+    if (h < 0)
+        h += 360;
+    if (isNaN(h))
+        h = 0;
+    return { h: h, s: s, v: v };
+};
+
+HSVtoRGB = function (color) {
+    var i;
+    var h, s, v, r, g, b;
+    h = color.h;
+    s = color.s;
+    v = color.v;
+    if (s === 0) {
+        // achromatic (grey)
+        r = g = b = v;
+        return [r, g, b];
+    }
+    h /= 60;            // sector 0 to 5
+    i = Math.floor(h);
+    f = h - i;          // factorial part of h
+    p = v * (1 - s);
+    q = v * (1 - s * f);
+    t = v * (1 - s * (1 - f));
+    switch (i) {
+        case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+        case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+        case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+        case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+        case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+        default:        // case 5:
+            r = v;
+            g = p;
+            b = q;
+            break;
+    }
+    return { r: parseInt(r), g: parseInt(g), b: parseInt(b) };
+}
+
+function rotateColor(hsvColor, factor) {
+    hsvColor.h = (hsvValues.h + factor) % 360;
+    return hsvColor;
+}
+
+function saturateColor(hsvColor, factor) {
+    hsvColor.s = Math.min(Math.max(hsvValues.s + factor, 0), 1);
+    return hsvColor;
+}
+
+function lightenColor(hsvColor, factor) {
+    hsvColor.v = Math.min(Math.max(hsvValues.v + factor, 0), 1);
+    return hsvColor;
+}
+
+function modifyHSVColor(colorHex, hFactor = 0, sFactor = 0, vFactor = 0) {
+    let prefix = colorHex.startsWith("#");
+    let rgbValues = hexToRgb((prefix ? "" : "#") + colorHex);
+    let hsvValues = RGBtoHSV(rgbValues);
+    
+    hsvValues = rotateColor(hsvValues, hFactor)
+    hsvValues = saturateColor(hsvValues, sFactor)
+    hsvValues = lightenColor(hsvValues, vFactor)
+
+    rgbValues = HSVtoRGB(hsvValues);
+    if (prefix)
+        return rgbToHex(rgbValues.r, rgbValues.g, rgbValues.b);
+    return rgbToHex(rgbValues.r, rgbValues.g, rgbValues.b).replace("#", "");
+}
