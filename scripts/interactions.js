@@ -22,7 +22,7 @@ window.colorHistoryID = -1;
 
 function updateColors() {
     let i = 0;
-    let newContent = "";
+    let newContent = "";//'<apex:repeat value="{!lstScheduledUser}" var="scheduledUser">';
     let newUrl = window.location.href.substring(0, window.location.href.indexOf("?")) + "?";
     for (const color of window.pageColors) {
         if (i > 0)
@@ -50,7 +50,7 @@ function updateColors() {
         <span class="rgbValues static">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
         <span class="colorVoid"></span>
         <span class="colorValue static">${color.hex}</span>
-        </div>`;
+        </div>`; //</apex:repeat>
 
         if (window.numberOfColors <= window.MAX_COLORS)
             newContent += "<div class=\"addBetween static\" style=\"background:" + midColor + "; color:" + (isColorBright(midColor) ? "black" : "white") + ";\" onclick=\"genNewColor(" + i + ", '" + midColor + "')\"></div>";

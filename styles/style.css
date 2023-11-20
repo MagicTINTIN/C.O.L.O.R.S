@@ -23,11 +23,12 @@ body {
     padding: 5px;
     padding-left: 2vh;
     padding-right: 3vh;
+    
+    z-index: 9999;
 }
 
 .navButton {
     text-align: center;
-    font-size: xx-large;
     font-weight: bold;
 
     user-drag: none;
@@ -63,7 +64,6 @@ body {
 
 .btnDisabled {
     text-align: center;
-    font-size: xx-large;
     font-weight: bold;
 
     user-drag: none;
@@ -136,6 +136,8 @@ body {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+
+    z-index: 9000;
 }
 
 #openControl:hover .arrowOpen {
@@ -166,6 +168,14 @@ body {
         width: calc(7vh - 10px);
         height: calc(7vh - 10px);
     }
+
+    .navButton {
+        font-size: calc(7vh - 35px);
+    }
+
+    .btnDisabled {
+        font-size: calc(7vh - 35px);
+    }
 }
 
 @media screen and (orientation:portrait) {
@@ -188,11 +198,11 @@ body {
     }
 
     .navButton {
-        font-size: x-large;
+        font-size: calc(5vh - 20px);
     }
 
     .btnDisabled {
-        font-size: x-large;
+        font-size: calc(5vh - 20px);
     }
 }
 
@@ -211,11 +221,11 @@ body {
     }
 
     .navButton {
-        font-size: x-large;
+        font-size: calc(7vh - 10px);
     }
 
     .btnDisabled {
-        font-size: x-large;
+        font-size: calc(7vh - 10px);
     }
 }
 

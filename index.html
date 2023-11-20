@@ -12,16 +12,17 @@
   <link href="styles/colors.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
   <meta name="author" content="ALC ProduXion/Softplus - MagicTINTIN">
-  <meta name="description" content="Colors Output Layout Of Random Schemes - A powerfull tool to generate beautiful color schemes.">
+  <meta name="description"
+    content="Colors Output Layout Of Random Schemes - A powerfull tool to generate beautiful color schemes.">
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="C.O.L.O.R.S">
   <meta property="og:title" content="C.O.L.O.R.S - Color palette generator">
-  <meta property="og:description" content="Colors Output Layout Of Random Schemes - A powerfull tool to generate beautiful color schemes.">
+  <meta property="og:description"
+    content="Colors Output Layout Of Random Schemes - A powerfull tool to generate beautiful color schemes.">
 
   <meta property="og:image" content="http://colors.softplus.fr/images/favicon.png">
   <meta property="og:image:type" content="image/png">
@@ -38,18 +39,24 @@
     <span id="closePanel" class="navButton" onclick="previous()"><span class="btnIcon"
         id="previousButton">&lt;</span><span class="btnDescription">Previous</span><span
         class="btnKey">&leftarrow;</span></span>
-    <span id="closePanel" class="navButton" onclick="generateNewColors()"><span
-        class="btnIcon">↻</span><span class="btnDescription">Randomize</span><span class="btnKey">Space</span></span>
-    <span id="closePanel" class="navButton" onclick="next()"><span class="btnIcon"
-        id="nextButton">&gt;</span><span class="btnDescription">Next</span><span
-        class="btnKey">&rightarrow;</span></span>
-    <span id="closePanel" class="navButton" onclick="closePanel()"><span
-        class="btnIcon">×</span><span class="btnDescription">Close</span><span class="btnKey">&downarrow;</span></span>
+    <span id="closePanel" class="navButton" onclick="generateNewColors()"><span class="btnIcon">↻</span><span
+        class="btnDescription">Randomize</span><span class="btnKey">Space</span></span>
+    <span id="closePanel" class="navButton" onclick="next()"><span class="btnIcon" id="nextButton">&gt;</span><span
+        class="btnDescription">Next</span><span class="btnKey">&rightarrow;</span></span>
+    <span id="closePanel" class="navButton" onclick="closePanel()"><span class="btnIcon">×</span><span
+        class="btnDescription">Close</span><span class="btnKey">&downarrow;</span></span>
   </div>
+
   <div id="openControl" onclick="openPanel()">
     <span class="arrowOpen">︿</span>
   </div>
-  <div id="colors" class="sortable"></div>
+
+  <apex:pageBlockSection columns="1" id="ActivePBS">
+    <div id="colors" class="sortable"></div>
+    <apex:commandButton value="Add" oncomplete="implementSortable();" action="{!OnAddMember}"
+      rerender="ActivePBS,errormsg" />
+  </apex:pageBlockSection>
+
   <script src="scripts/script.js"></script>
   <script src="scripts/colors.js"></script>
   <script src="scripts/wikipediaColorNames.js"></script>
