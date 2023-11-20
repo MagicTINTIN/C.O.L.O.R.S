@@ -290,6 +290,33 @@ body {
     color: black;
 }
 
+.labelModify {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.labelButton {
+    background-color: lightgray;
+    color: black;
+    border-radius: 2px;
+    text-align: center;
+    transition: all .3s;
+}
+
+.labelButton:hover {
+    background-color: darkgray;
+}
+
+.labelButton:active {
+    background-color: gray;
+}
+
+.verticalCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;}
+
 .labelValue {
     border-radius: 1vh;
 }
@@ -368,6 +395,12 @@ body {
         width: calc(7vh - 35px);
         height: calc(7vh - 35px);
     }
+
+    .labelButton {
+        font-size: calc(7vh - 35px);
+        width: calc(7vh - 35px);
+        height: calc(7vh - 35px);
+    }
 }
 
 @media screen and (orientation:portrait) {
@@ -412,6 +445,12 @@ body {
         width: calc(5vh - 20px);
         height: calc(5vh - 20px);
     }
+
+    .labelButton {
+        font-size: calc(5vh - 25px);
+        width: calc(5vh - 25px);
+        height: calc(5vh - 25px);
+    }
 }
 
 @media screen and (max-height: 800px) {
@@ -438,9 +477,15 @@ body {
 
 
     .labelValue {
-        font-size: calc(7vh - 10px);
-        width: calc(7vh - 10px);
-        height: calc(7vh - 10px);
+        font-size: min( max( calc(7vh - 20px), 6vh), 5vw );
+        width: min( max( calc(7vh - 20px), 6vh), 5vw );
+        height: min( max( calc(7vh - 20px), 6vh), 5vw );
+    }
+
+    .labelButton {
+        font-size: min( max(calc(7vh - 25px), 5vh), 4vw );
+        width: min( max(calc(7vh - 25px), 5vh), 4vw );
+        height: min( max(calc(7vh - 25px), 5vh), 4vw );
     }
 }
 

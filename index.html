@@ -50,16 +50,45 @@
   </div>
 
   <div id="moreControl">
-    <span id="hueLabelContainer" class="moreLabels"><span class="labelValue" id="hueLabel">H</span><span
-        class="btnDescription">Hue</span></span>
-    <span id="satLabelContainer" class="moreLabels"><span class="labelValue" id="satLabel">S</span><span
-        class="btnDescription">Saturation</span></span>
-    <span id="valLabelContainer" class="moreLabels"><span class="labelValue" id="valLabel">V</span><span
-        class="btnDescription">Value</span></span>
+    <span id="hueLabelContainer" class="moreLabels">
+      <span class="labelModify">
+        <span class="verticalCenter"><span onclick="applyModifiers(-.1,0,0)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="labelValue" id="hueLabel">H</span>
+        <span class="verticalCenter"><span onclick="applyModifiers(.1,0,0)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+      </span>
+      <span class="labelModify">
+        <span class="btnDescription">Hue</span>
+      </span>
+    </span>
+    <span id="satLabelContainer" class="moreLabels">
+      <span class="labelModify">
+        <span class="verticalCenter"><span onclick="applyModifiers(-.1,0,0)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="labelValue" id="satLabel">S</span>
+        <span class="verticalCenter"><span onclick="applyModifiers(.1,0,0)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+      </span>
+      <span class="labelModify">
+        <span class="btnDescription">Saturation</span>
+      </span>
+    </span>
+    <span id="valLabelContainer" class="moreLabels">
+      <span class="labelModify">
+        <span class="verticalCenter"><span onclick="applyModifiers(-.1,0,0)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="labelValue" id="valLabel">V</span>
+        <span class="verticalCenter"><span onclick="applyModifiers(.1,0,0)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+      </span>
+      <span class="labelModify">
+        <span class="btnDescription">Value</span>
+      </span>
+    </span>
+    <span id="onlySelectedButton" class="navButton" onclick="toggleModifySelected()">
+      <span class="btnIcon" id="modifyOnlySelected">☐</span>
+      <span class="btnDescription">Selec. Only</span>
+      <span class="btnKey">O</span>
+    </span>
     <span id="selectButton" class="navButton" onclick="selectMethod()"><span class="btnIcon">⚙</span><span
         class="btnDescription">More</span><span class="btnKey">Esc</span></span>
     <span id="closeOptions" class="navButton" onclick="toggleOptions()"><span class="btnIcon">×</span><span
-        class="btnDescription">Close</span><span class="btnKey">C</span></span>
+        class="btnDescription">Close</span><span class="btnKey">Ctrl</span></span>
   </div>
 
   <div id="openControl" onclick="openPanel()">

@@ -214,7 +214,7 @@ function modifyHSVColor(colorHex, hFactor = 0, sFactor = 0, vFactor = 0) {
     let prefix = colorHex.startsWith("#");
     let rgbValues = hexToRgb((prefix ? "" : "#") + colorHex);
     let hsvValues = RGBtoHSV(rgbValues);
-    
+
     hsvValues = rotateColor(hsvValues, hFactor)
     hsvValues = saturateColor(hsvValues, sFactor)
     hsvValues = lightenColor(hsvValues, vFactor)

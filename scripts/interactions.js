@@ -17,6 +17,8 @@ document.getElementById("body").addEventListener("keyup", (e) => {
         selectMethod();
     if (e.key == "Control")
         toggleOptions();
+    if (e.key.toUpperCase() == "O")
+        toggleModifySelected();
 });
 
 window.pageColors = [];
@@ -258,3 +260,16 @@ function hideOptions() {
 }
 
 hideOptions()
+
+window.modifyOnlySelected = false;
+function toggleModifySelected() {
+    window.modifyOnlySelected = !window.modifyOnlySelected;
+    if (window.modifyOnlySelected)
+        document.getElementById("modifyOnlySelected").innerHTML = "☑";
+    else
+        document.getElementById("modifyOnlySelected").innerHTML = "☐";
+}
+
+function applyModifiers(hFactor, sFactor, vFactor) {
+    
+}
