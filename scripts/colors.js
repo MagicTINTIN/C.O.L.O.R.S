@@ -103,3 +103,9 @@ function findMediumColor(color1, color2) {
 
     return rgbToHex(mediumColor.r, mediumColor.g, mediumColor.b);
 }
+
+function isValidHexColor(hex) {
+    let checkHex = hex.split("#").join("");
+    const hexRegex = /^([0-9a-fA-F]{6})$/; //[0-9a-fA-F]{3}| but I don't want the 3th version
+    return hexRegex.test(checkHex);
+}

@@ -3,13 +3,13 @@ window.displayNames = true;
 
 document.getElementById("body").addEventListener("keyup", (e) => {
     //console.log(e, e.key);
-    if (e.key == "ArrowUp" || e.key == "z")
+    if (e.key == "ArrowUp")
         document.getElementById("panelControl").style.transform = "translateY(0px)";
-    if (e.key == "ArrowDown" || e.key == "s")
+    if (e.key == "ArrowDown")
         document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
-    if (e.key == "ArrowLeft" || e.key == "q")
+    if (e.key == "ArrowLeft")
         previous();
-    if (e.key == "ArrowRight" || e.key == "d")
+    if (e.key == "ArrowRight")
         next();
     if (e.key === " ")
         generateNewColors();
@@ -43,7 +43,8 @@ function updateColors() {
         else
             newContent += `<div id="color${color.hex}${color.isLocked ? "L" : ""}" class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
         newContent += `<span class="colorName static">${getClosestColor(color.hex)}</span>
-        <span class="colorHex static" onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">#${color.hex}</span>
+        <input onchange="updateColorHex(this)" onpaste="updateColorHex(this)" oninput="updateColorHex(this)" size="7" maxlength="7" class="colorHex static" type="text" name="updatePseudo" id="hex${color.hex}" value="#${color.hex}">
+        <span class="deleteContainer static"><span class="delete static"  onclick=" if (!copytcb('#${color.hex}')) copied(this);" ontouchstart=" if (!copytcb('#${color.hex}')) copied(this);">⧉</span></span>
         <span class="lock ${color.isLocked ? "locked" : "unlocked"} static" onclick="lockColor(this, '${color.hex}')" ontouchstart="lockColor(this, '${color.hex}')">LOCK</span>
         ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer static"><span class="delete static" onclick="deleteColor('${color.hex}')" ontouchstart="deleteColor('${color.hex}')">×</span></span>`}
         <span class="rgbValues static">R: ${formatNumber(colorRGB.r, 255)}<br>G: ${formatNumber(colorRGB.g, 255)}<br>B: ${formatNumber(colorRGB.b, 255)}</span>
@@ -119,7 +120,8 @@ if (window.location.href.indexOf("?") > -1) {
             color = color.slice(0, -1);
             locked = true;
         }
-        newColors = [...newColors, { isLocked: locked, hex: color }]
+        if (isValidHexColor(color))
+            newColors = [...newColors, { isLocked: locked, hex: color }]
     }
     window.pageColors = newColors;
     window.numberOfColors = window.pageColors.length;
@@ -181,4 +183,22 @@ function updateButtons() {
         next.classList.remove("btnIcon");
         next.classList.add("btnDisabled");
     }
+}
+
+function updateColorHex(object) {
+    if (!isValidHexColor(object.value))
+        return object.classList.add("invalidColor");
+    object.classList.remove("invalidColor");
+    let color = object.value.toUpperCase().split("#").join("");
+    newColors = []
+    for (const key in window.pageColors) {
+        const element = window.pageColors[key];
+        if (element.hex == object.id.toUpperCase().split("HEX").join(""))
+            newColors = [...newColors, {isLocked: element.isLocked, hex:color}];
+        else
+            newColors = [...newColors, element];
+    }
+    window.pageColors = newColors;
+    saveColorsToHistory();
+    updateColors();
 }

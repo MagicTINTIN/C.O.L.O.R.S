@@ -30,7 +30,7 @@
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    border: solid 2px transparent;
+    border: solid 2px black;
 }
 
 .colorHex:hover {
@@ -41,12 +41,9 @@
     background-color: #000000CC;
 }
 
-.copied {
-    border: solid 2px green;
-    background-color: #00990055;
-    box-shadow: 0 0 10px #55FF55;
-    text-shadow: 0 0 5px white;
-    box-sizing: border-box;
+.invalidColor{
+    background-color: #AA0000CC;
+    border: solid 2px red;
 }
 
 .colorName {
@@ -187,6 +184,13 @@
 .delete:active {
     text-shadow: 0 0 5px gray;
     transform: scale(1.2);
+}
+
+
+.copied {
+    color: #88ff88 !important;
+    text-shadow: 0 0 10px #88ff88 !important;
+    transition: all .5s;
 }
 
 @media screen and (orientation:landscape) {
