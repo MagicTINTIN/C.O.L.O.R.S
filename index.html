@@ -41,6 +41,8 @@
         class="btnKey">&leftarrow;</span></span>
     <span id="closePanel" class="navButton" onclick="generateNewColors()"><span class="btnIcon">↻</span><span
         class="btnDescription">Randomize</span><span class="btnKey">Space</span></span>
+    <span id="selectButton" class="navButton" onclick="selectMethod()"><span class="btnIcon">=</span><span
+        class="btnDescription">Rules</span><span class="btnKey">Esc</span></span>
     <span id="closePanel" class="navButton" onclick="next()"><span class="btnIcon" id="nextButton">&gt;</span><span
         class="btnDescription">Next</span><span class="btnKey">&rightarrow;</span></span>
     <span id="closePanel" class="navButton" onclick="closePanel()"><span class="btnIcon">×</span><span
@@ -56,6 +58,13 @@
     <apex:commandButton value="Add" oncomplete="implementSortable();" action="{!OnAddMember}"
       rerender="ActivePBS,errormsg" />
   </apex:pageBlockSection>
+
+  <div id="rulesBackground" onclick="selectMethod()">
+    <div onclick="hideMethods()" id="closeRules"><span>×</span></div>
+    <div id="rulesPanel" onclick="event.stopPropagation()">
+      <h1 id="rulesTitle">Choose a method to generate palettes</h1>
+    </div>
+  </div>
 
   <script src="scripts/script.js"></script>
   <script src="scripts/colors.js"></script>

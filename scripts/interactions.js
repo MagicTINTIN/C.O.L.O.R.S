@@ -13,6 +13,8 @@ document.getElementById("body").addEventListener("keyup", (e) => {
         next();
     if (e.key === " ")
         generateNewColors();
+    if (e.key == "Escape")
+        selectMethod();
 });
 
 window.pageColors = [];
@@ -202,11 +204,33 @@ function updateColorHex(object) {
     for (const key in window.pageColors) {
         const element = window.pageColors[key];
         if (element.hex == object.id.toUpperCase().split("HEX").join(""))
-            newColors = [...newColors, {isLocked: element.isLocked, hex:color}];
+            newColors = [...newColors, { isLocked: element.isLocked, hex: color }];
         else
             newColors = [...newColors, element];
     }
     window.pageColors = newColors;
     saveColorsToHistory();
     updateColors();
+}
+
+window.displayRules = false;
+function selectMethod() {
+    window.displayRules = !window.displayRules;
+    if (window.displayRules)
+        showMethods();
+    else
+        hideMethods();
+
+}
+
+function showMethods() {
+    const rulesbg = document.getElementById("rulesBackground");
+    rulesbg.style.display = "flex";
+    rulesbg.style.transform = "scale(1)";
+}
+
+function hideMethods() {
+    const rulesbg = document.getElementById("rulesBackground");
+    rulesbg.style.display = "none";
+    rulesbg.style.transform = "scale(0)";
 }
