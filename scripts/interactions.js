@@ -2,7 +2,7 @@ window.MAX_COLORS = 30;
 window.displayNames = true;
 
 document.getElementById("body").addEventListener("keyup", (e) => {
-    //console.log(e, e.key);
+    console.log(e, e.key);
     if (e.key == "ArrowUp")
         openPanel()
     if (e.key == "ArrowDown")
@@ -15,6 +15,8 @@ document.getElementById("body").addEventListener("keyup", (e) => {
         generateNewColors();
     if (e.key == "Escape")
         selectMethod();
+    if (e.key == "Control")
+        toggleOptions();
 });
 
 window.pageColors = [];
@@ -234,3 +236,25 @@ function hideMethods() {
     rulesbg.style.display = "none";
     rulesbg.style.transform = "scale(0)";
 }
+
+window.displayOptions = false;
+function toggleOptions() {
+    window.displayOptions = !window.displayOptions;
+    if (window.displayOptions)
+        showOptions();
+    else
+        hideOptions();
+
+}
+
+function showOptions() {
+    const optionsDiv = document.getElementById("moreControl");
+    optionsDiv.style.transform = "translateY(0px)";
+}
+
+function hideOptions() {
+    const optionsDiv = document.getElementById("moreControl");
+    optionsDiv.style.transform = "translateY(calc( 20vh + 30px ))";
+}
+
+hideOptions()

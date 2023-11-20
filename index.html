@@ -41,12 +41,25 @@
         class="btnKey">&leftarrow;</span></span>
     <span id="closePanel" class="navButton" onclick="generateNewColors()"><span class="btnIcon">↻</span><span
         class="btnDescription">Randomize</span><span class="btnKey">Space</span></span>
-    <span id="selectButton" class="navButton" onclick="selectMethod()"><span class="btnIcon">=</span><span
-        class="btnDescription">Rules</span><span class="btnKey">Esc</span></span>
+    <span id="optionsButton" class="navButton" onclick="toggleOptions()"><span class="btnIcon">=</span><span
+        class="btnDescription">More</span><span class="btnKey">Ctrl</span></span>
     <span id="closePanel" class="navButton" onclick="next()"><span class="btnIcon" id="nextButton">&gt;</span><span
         class="btnDescription">Next</span><span class="btnKey">&rightarrow;</span></span>
     <span id="closePanel" class="navButton" onclick="closePanel()"><span class="btnIcon">×</span><span
         class="btnDescription">Close</span><span class="btnKey">&downarrow;</span></span>
+  </div>
+
+  <div id="moreControl">
+    <span id="hueLabelContainer" class="moreLabels"><span class="labelValue" id="hueLabel">H</span><span
+        class="btnDescription">Hue</span></span>
+    <span id="satLabelContainer" class="moreLabels"><span class="labelValue" id="satLabel">S</span><span
+        class="btnDescription">Saturation</span></span>
+    <span id="valLabelContainer" class="moreLabels"><span class="labelValue" id="valLabel">V</span><span
+        class="btnDescription">Value</span></span>
+    <span id="selectButton" class="navButton" onclick="selectMethod()"><span class="btnIcon">⚙</span><span
+        class="btnDescription">More</span><span class="btnKey">Esc</span></span>
+    <span id="closeOptions" class="navButton" onclick="toggleOptions()"><span class="btnIcon">×</span><span
+        class="btnDescription">Close</span><span class="btnKey">C</span></span>
   </div>
 
   <div id="openControl" onclick="openPanel()">

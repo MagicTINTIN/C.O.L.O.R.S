@@ -1,3 +1,24 @@
+:root {
+    --hue: linear-gradient(90deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 10%,
+            rgba(208, 222, 33, 1) 20%,
+            rgba(79, 220, 74, 1) 30%,
+            rgba(63, 218, 216, 1) 40%,
+            rgba(47, 201, 226, 1) 50%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 70%,
+            rgba(186, 12, 248, 1) 80%,
+            rgba(251, 7, 217, 1) 90%,
+            rgba(255, 0, 0, 1) 100%);
+    --sat: linear-gradient(90deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 0, 0, 1) 100%);
+    --val: linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(255, 0, 0, 1) 100%);
+}
+
 html,
 body {
     background-color: black;
@@ -25,6 +46,24 @@ body {
     padding-right: 3vh;
 
     z-index: 9999;
+}
+
+#moreControl {
+    box-shadow: 5px 5px 10px #00000099;
+    background-color: white;
+    position: fixed;
+
+    transition: all .15s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 5px;
+    padding-left: 3vh;
+    padding-right: 3vh;
+
+    z-index: 19999;
 }
 
 .navButton {
@@ -153,7 +192,7 @@ body {
 
 #rulesBackground {
     position: fixed;
-    top:0;
+    top: 0;
     left: 0;
 
     width: 100vw;
@@ -168,8 +207,8 @@ body {
 
 #closeRules {
     position: fixed;
-    top: calc( 10vh + min(5vh, 5vw) );
-    right: calc( 10vw + min(5vh, 5vw) );
+    top: calc(10vh + min(5vh, 5vw));
+    right: calc(10vw + min(5vh, 5vw));
     width: 50px;
     height: 50px;
     font-size: 50px;
@@ -221,7 +260,7 @@ body {
     text-align: center;
     font-family: 'Lucida Console', monospace;
 
-    cursor:default;
+    cursor: default;
     user-drag: none;
     user-select: none;
     -moz-user-select: none;
@@ -229,6 +268,63 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.moreLabels {
+    cursor: default;
+    text-align: center;
+    font-weight: bold;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    transition: all .3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    color: black;
+}
+
+.labelValue {
+    border-radius: 1vh;
+}
+
+#hueLabel {
+    background: linear-gradient(90deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 10%,
+            rgba(208, 222, 33, 1) 20%,
+            rgba(79, 220, 74, 1) 30%,
+            rgba(63, 218, 216, 1) 40%,
+            rgba(47, 201, 226, 1) 50%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 70%,
+            rgba(186, 12, 248, 1) 80%,
+            rgba(251, 7, 217, 1) 90%,
+            rgba(255, 0, 0, 1) 100%);
+    color: black;
+}
+
+#satLabel {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 0, 0, 1) 100%);
+    color: black;
+}
+
+#valLabel {
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(255, 0, 0, 1) 100%);
+    color: black;
+}
+
+
 
 @media screen and (orientation:landscape) {
     #openControl {
@@ -244,6 +340,15 @@ body {
         box-sizing: border-box;
     }
 
+    #moreControl {
+        width: 50vw;
+        height: 7vh;
+        border-radius: 3.5vh;
+        left: 25vw;
+        bottom: calc(40px + 7vh);
+        box-sizing: border-box;
+    }
+
     #logoNavBar {
         width: calc(7vh - 10px);
         height: calc(7vh - 10px);
@@ -256,6 +361,13 @@ body {
     .btnDisabled {
         font-size: calc(7vh - 35px);
     }
+
+
+    .labelValue {
+        font-size: calc(7vh - 35px);
+        width: calc(7vh - 35px);
+        height: calc(7vh - 35px);
+    }
 }
 
 @media screen and (orientation:portrait) {
@@ -265,6 +377,15 @@ body {
         border-radius: 2.5vh;
         left: 5vw;
         bottom: 0px;
+        box-sizing: border-box;
+    }
+
+    #moreControl {
+        width: 90vw;
+        height: 5vh;
+        border-radius: 2.5vh;
+        left: 5vw;
+        bottom: calc(5vh + 10px);
         box-sizing: border-box;
     }
 
@@ -283,6 +404,13 @@ body {
 
     .btnDisabled {
         font-size: calc(5vh - 20px);
+    }
+
+
+    .labelValue {
+        font-size: calc(5vh - 20px);
+        width: calc(5vh - 20px);
+        height: calc(5vh - 20px);
     }
 }
 
@@ -306,6 +434,13 @@ body {
 
     .btnDisabled {
         font-size: calc(7vh - 10px);
+    }
+
+
+    .labelValue {
+        font-size: calc(7vh - 10px);
+        width: calc(7vh - 10px);
+        height: calc(7vh - 10px);
     }
 }
 
