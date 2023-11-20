@@ -52,9 +52,11 @@
   <div id="moreControl">
     <span id="hueLabelContainer" class="moreLabels">
       <span class="labelModify">
-        <span class="verticalCenter"><span onclick="applyModifiers(-18,0,0)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(-18,0,0)"
+            class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
         <span class="labelValue" id="hueLabel">H</span>
-        <span class="verticalCenter"><span onclick="applyModifiers(18,0,0)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(18,0,0)"
+            class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
       </span>
       <span class="labelModify">
         <span class="btnDescription">Hue</span>
@@ -62,9 +64,11 @@
     </span>
     <span id="satLabelContainer" class="moreLabels">
       <span class="labelModify">
-        <span class="verticalCenter"><span onclick="applyModifiers(0,-.1,0)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(0,-.1,0)"
+            class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
         <span class="labelValue" id="satLabel">S</span>
-        <span class="verticalCenter"><span onclick="applyModifiers(0,.1,0)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(0,.1,0)"
+            class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
       </span>
       <span class="labelModify">
         <span class="btnDescription">Saturation</span>
@@ -72,9 +76,11 @@
     </span>
     <span id="valLabelContainer" class="moreLabels">
       <span class="labelModify">
-        <span class="verticalCenter"><span onclick="applyModifiers(0,0,-.1)" class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(0,0,-.1)"
+            class="labelButton decrementLabel verticalCenter"><span>-</span></span></span>
         <span class="labelValue" id="valLabel">V</span>
-        <span class="verticalCenter"><span onclick="applyModifiers(0,0,.1)" class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
+        <span class="verticalCenter"><span onclick="applyModifiers(0,0,.1)"
+            class="labelButton incrementLabel verticalCenter"><span>+</span></span></span>
       </span>
       <span class="labelModify">
         <span class="btnDescription">Value</span>
@@ -105,6 +111,43 @@
     <div onclick="hideMethods()" id="closeRules"><span>×</span></div>
     <div id="rulesPanel" onclick="event.stopPropagation()">
       <h1 id="rulesTitle">Choose a method to generate palettes</h1>
+      <h3 id="rulesSubTitle">(not working for the moment)</h3>
+      <div class="ruleSpace"></div>
+      <div id="rulesChoices">
+        <div class="typeChoice">
+          <input type="radio" checked="checked">
+          <label>Random</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Monochromatic</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Analogous</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Complementary</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Split Complementary</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Triadic</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Square</label>
+        </div>
+        <div class="typeChoice">
+          <input type="radio">
+          <label>Rectangle</label>
+        </div>
+      </div>
+      <div class="ruleLargeSpace"></div>
     </div>
   </div>
 

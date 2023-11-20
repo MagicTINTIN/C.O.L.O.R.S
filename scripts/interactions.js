@@ -49,7 +49,7 @@ function updateColors() {
         else
             newContent += `<div id="color${color.hex}${color.isLocked ? "L" : ""}" class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
         newContent += `<span class="colorName static">${getClosestColor(color.hex)}</span>
-        <input onchange="updateColorHex(this)" onpaste="updateColorHex(this)" oninput="updateColorHex(this)" size="7" maxlength="7" class="colorHex static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} type="text" name="updatePseudo" id="hex${color.hex}" value="#${color.hex}">
+        <input onpaste="updateColorHex(this)" oninput="updateColorHex(this)" size="7" maxlength="7" class="colorHex static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} type="text" name="updatePseudo" id="hex${color.hex}" value="#${color.hex}">
         <span class="deleteContainer static"><span class="delete static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} onclick=" if (!copytcb('#${color.hex}')) copied(this);">⧉</span></span>
         <span class="deleteContainer static"><span class="lock static ${color.isLocked ? "locked" : "unlocked"}" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""}  onclick="lockColor(this, '${color.hex}')">${color.isLocked ? "☑" : "☐"}</span></span>
         ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer static"><span class="delete static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""}  onclick="deleteColor('${color.hex}')">×</span></span>`}
@@ -229,14 +229,16 @@ function selectMethod() {
 
 function showMethods() {
     const rulesbg = document.getElementById("rulesBackground");
-    rulesbg.style.display = "flex";
-    rulesbg.style.transform = "scale(1)";
+    const rules = document.getElementById("rulesPanel");
+    rulesbg.style.transform = "scale(1.1)";
+    rules.style.transform = "scale(1)";
 }
 
 function hideMethods() {
     const rulesbg = document.getElementById("rulesBackground");
-    rulesbg.style.display = "none";
+    const rules = document.getElementById("rulesPanel");
     rulesbg.style.transform = "scale(0)";
+    rules.style.transform = "scale(0)";
 }
 
 window.displayOptions = false;
