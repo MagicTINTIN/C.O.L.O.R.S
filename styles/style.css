@@ -97,6 +97,15 @@ body {
     text-align: center;
 }
 
+#logoNavBar {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 @media screen and (orientation:landscape) {
     #panelControl {
         width: 50vw;
