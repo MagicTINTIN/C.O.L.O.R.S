@@ -9,197 +9,6 @@ body {
     font-family: 'Lucida Console', monospace;
 }
 
-#colors {
-    display: flex;
-    justify-content: space-around;
-}
-
-.color {
-    display: flex;
-    justify-content: space-around;
-    font-weight: bold;
-}
-
-.colorHex {
-    cursor: pointer;
-
-    margin: auto;
-    text-align: center;
-    color: white;
-    background-color: #00000077;
-    font-weight: bold;
-    box-sizing: border-box;
-
-    padding: 10px;
-    border-radius: 10px;
-
-    transition: all .3s;
-
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    border: solid 2px transparent;
-}
-
-.colorHex:hover {
-    background-color: #00000055;
-}
-
-.colorHex:active {
-    background-color: #000000CC;
-}
-
-.copied {
-    border: solid 2px green;
-    background-color: #00990055;
-    box-shadow: 0 0 10px #55FF55;
-    text-shadow: 0 0 5px white;
-    box-sizing: border-box;
-}
-
-.colorName {
-    font-size: small;
-    text-align: left;
-    padding: 0;
-    margin: 10px;
-}
-
-.colorValue {
-    font-size: small;
-    text-align: right;
-    padding: 0;
-    margin: 10px;
-}
-
-.lock {
-    cursor: pointer;
-    margin: auto;
-    text-align: center;
-    transition: all .3s;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-.unlocked {
-    border: solid 2px black;
-    background-color: #00000077;
-}
-
-.unlocked:hover {
-    background-color: #00000055;
-}
-
-.unlocked:active {
-    background-color: #000000CC;
-}
-
-
-.locked {
-    border: solid 2px blue;
-    background-color: #0000FF77;
-
-    box-shadow: 0 0 10px #5555FF;
-    text-shadow: 0 0 5px white;
-}
-
-.locked:hover {
-    background-color: #0000FF55;
-}
-
-.locked:active {
-    background-color: #0000FFCC;
-}
-
-
-.rgbValues {
-    margin: auto;
-    text-align: center;
-    white-space: pre;
-}
-
-.addBetween {
-    font-weight: bold;
-    overflow: hidden;
-
-    width: 10px;
-    height: 10px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-
-    border: solid 3px transparent;
-
-    cursor: pointer;
-
-    transition: all .3s;
-
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-
-    box-sizing: border-box;
-}
-
-.addBetween:hover {
-    border: solid 3px white;
-}
-
-.addBetween:active {
-    border: solid 3px black;
-    border-top: none;
-    border-bottom: none;
-}
-
-.deleteContainer {
-    display: flex;
-    justify-content: space-around;
-}
-
-.delete {
-    text-align: center;
-    font-size: xx-large;
-    font-weight: normal;
-
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-
-    transition: all .3s;
-
-    color: black;
-}
-
-.delete:hover {
-    text-shadow: 0 0 5px gray;
-    transform: scale(1.5);
-}
-
-.delete:active {
-    text-shadow: 0 0 5px gray;
-    transform: scale(1.2);
-}
-
 #panelControl {
     box-shadow: 5px 5px 10px #00000099;
     background-color: white;
@@ -289,37 +98,6 @@ body {
 }
 
 @media screen and (orientation:landscape) {
-    #colors {
-        flex-direction: row;
-    }
-
-    .color {
-        min-height: 100vh;
-        flex-direction: column;
-    }
-
-    .addBetween {
-        border-top: none;
-        border-bottom: none;
-        min-height: 100vh;
-    }
-
-    .addBetween:hover {
-        border-top: none;
-        border-bottom: none;
-        min-height: 100vh;
-    }
-
-    .addBetween:active {
-        border-top: none;
-        border-bottom: none;
-        min-height: 100vh;
-    }
-
-    .deleteContainer {
-        flex-direction: row;
-    }
-
     #panelControl {
         width: 50vw;
         height: 7vh;
@@ -336,39 +114,6 @@ body {
 }
 
 @media screen and (orientation:portrait) {
-    .btnKey {
-        display: none;
-    }
-
-    #colors {
-        flex-direction: column;
-    }
-
-    .color {
-        min-width: 100vw;
-        flex-direction: row;
-    }
-
-    .addBetween {
-        border-right: none;
-        border-left: none;
-        min-width: 100vw;
-    }
-
-    .addBetween:hover {
-        border-right: none;
-        border-left: none;
-    }
-
-    .addBetween:active {
-        border-right: none;
-        border-left: none;
-    }
-
-    .deleteContainer {
-        flex-direction: column;
-    }
-
     #panelControl {
         width: 90vw;
         height: 5vh;
@@ -382,6 +127,26 @@ body {
         width: calc(5vh - 10px);
         height: calc(5vh - 10px);
     }
+
+    .btnKey {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 800px) {
+
+    .btnKey {
+        display: none;
+    }
+
+}
+
+@media screen and ((max-height: 660px) or ((orientation:portrait) and (max-height: 900px))) {
+
+    .btnDescription {
+        display: none;
+    }
+
 }
 
 /* ----------- SCROLLBAR ----------- */
