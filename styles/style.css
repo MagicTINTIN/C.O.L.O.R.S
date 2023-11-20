@@ -106,7 +106,53 @@ body {
     -ms-user-select: none;
 }
 
+#openControl {
+    box-shadow: 5px 5px 10px #00000099;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin: auto;
+    background-color: white;
+    position: fixed;
+
+    transition: all .15s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 80px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+
+    left: calc(50vw - 40px);
+    bottom: 0px;
+
+    cursor: pointer;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#openControl:hover .arrowOpen {
+    transform: translateY(-10px);
+}
+
+.arrowOpen {
+    width: 100%;
+    transform: translateY(-5px);
+    transition: all .3s;
+}
+
 @media screen and (orientation:landscape) {
+    #openControl {
+        opacity: .5;
+    }
+
     #panelControl {
         width: 50vw;
         height: 7vh;
@@ -140,6 +186,14 @@ body {
     .btnKey {
         display: none;
     }
+
+    .navButton {
+        font-size: x-large;
+    }
+
+    .btnDisabled {
+        font-size: x-large;
+    }
 }
 
 @media screen and (max-height: 800px) {
@@ -156,6 +210,13 @@ body {
         display: none;
     }
 
+    .navButton {
+        font-size: x-large;
+    }
+
+    .btnDisabled {
+        font-size: x-large;
+    }
 }
 
 /* ----------- SCROLLBAR ----------- */

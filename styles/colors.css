@@ -272,3 +272,11 @@
         display: none;
     }
 }
+
+@media screen and (max-height: 500px) {
+
+    .rgbValues {
+        display: none;
+    }
+
+}

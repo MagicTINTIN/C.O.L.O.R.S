@@ -4,9 +4,9 @@ window.displayNames = true;
 document.getElementById("body").addEventListener("keyup", (e) => {
     //console.log(e, e.key);
     if (e.key == "ArrowUp")
-        document.getElementById("panelControl").style.transform = "translateY(0px)";
+        openPanel()
     if (e.key == "ArrowDown")
-        document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
+        closePanel()
     if (e.key == "ArrowLeft")
         previous();
     if (e.key == "ArrowRight")
@@ -148,7 +148,14 @@ function loadColorsFromHistory() {
 
 function closePanel() {
     document.getElementById("panelControl").style.transform = "translateY(calc( 10vh + 30px ))";
+    document.getElementById("openControl").style.transform = "translateY(0px)";
 }
+
+function openPanel() {
+    document.getElementById("panelControl").style.transform = "translateY(0px)";
+    document.getElementById("openControl").style.transform = "translateY(calc( 10vh + 50px ))";
+}
+openPanel();
 
 function previous() {
     if (window.colorHistoryID > 0) {

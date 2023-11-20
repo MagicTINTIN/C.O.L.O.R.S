@@ -5,6 +5,6 @@ Generate your own color scheme quickly !
 ![MicaClient++ banner](./images/logov2.png)
 ### Future features
 ```
-- go back
+- fix grab on touchscreen (if possible ?)
 - implementing generation using monochromatic, analogous, complementary, split complementary, triadic square and rectangle schemes
 ```
