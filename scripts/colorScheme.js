@@ -1,3 +1,15 @@
+window.schemeUsed = 0
+schemesIDs = {
+    randomValue:0,
+    monochromaticValue:1,
+    analogousValue:2,
+    complementaryValue:3,
+    splitcomplementaryValue:4,
+    triadicValue:5,
+    squareValue:6,
+    rectangleValue:7,
+}
+
 function generateColorScheme(baseColor) {
     const baseHue = parseInt(baseColor.replace(/[^\d]/g, ''), 10);
     const analogous1 = (baseHue + 30) % 360;

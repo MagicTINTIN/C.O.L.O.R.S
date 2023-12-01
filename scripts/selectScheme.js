@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
     matches.forEach(function(match) {
       match.addEventListener('change', function() {
-        console.log(this.value);
+        console.log(`Color Scheme := ${this.value}`);
+        window.schemeUsed = schemesIDs[this.value]
       });
     });
   });
