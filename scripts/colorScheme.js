@@ -10,20 +10,98 @@ schemesIDs = {
     rectangleValue:7,
 }
 
-function generateColorScheme(baseColor) {
-    const baseHue = parseInt(baseColor.replace(/[^\d]/g, ''), 10);
-    const analogous1 = (baseHue + 30) % 360;
-    const analogous2 = (baseHue - 30 + 360) % 360;
-    const complementary = (baseHue + 180) % 360;
-    const splitComplementary1 = (baseHue + 150) % 360;
-    const splitComplementary2 = (baseHue - 150 + 360) % 360;
-    const triadic1 = (baseHue + 120) % 360;
-    const triadic2 = (baseHue - 120 + 360) % 360;
-    const square1 = (baseHue + 90) % 360;
-    const square2 = (baseHue + 180) % 360;
-    const square3 = (baseHue - 90 + 360) % 360;
-    const rectangle1 = (baseHue + 60) % 360;
-    const rectangle2 = (baseHue + 180) % 360;
-    const rectangle3 = (baseHue - 60 + 360) % 360;
-    const rectangle4 = (baseHue + 120) % 360;
+function generateMonochromatic(color, n) {
+    const [r, g, b] = hexToRgb(color);
+    const step = 20;
+    const monochromaticColors = [];
+
+    for (let i = 0; i < n; i++) {
+        const newColor = rgbToHex(r, g, b + i * step);
+        monochromaticColors.push(newColor);
+    }
+
+    return monochromaticColors;
 }
+
+function generateAnalogous(color, n) {
+    const [r, g, b] = hexToRgb(color);
+    const angleStep = 30;
+    const analogousColors = [];
+
+    for (let i = 0; i < n; i++) {
+        const hslColor = `hsl(${(i * angleStep) % 360}, 100%, 50%)`;
+        analogousColors.push(hslColor);
+    }
+
+    return analogousColors;
+}
+
+// Function to generate split complementary colors
+function generateSplitComplementary(color) {
+    const [r, g, b] = hexToRgb(color);
+    const angle = 30; // Adjust this value to control the color difference
+    const splitComplementaryColors = [
+        color,
+        `hsl(${(180 + angle) % 360}, 100%, 50%)`,
+        `hsl(${(180 - angle) % 360}, 100%, 50%)`
+    ];
+
+    return splitComplementaryColors;
+}
+
+function generateGeometricalColors(base, n, angle, rectangle = false) {
+    const [r, g, b] = hexToRgb(color);
+    const angle = 60; // Adjust this value to control the color difference
+    const geometryColors = [color];
+
+
+    for (let i = 1; i < n / 2; i++) {
+        const hslColor1 = `hsl(${(angle * i) % 360}, 100%, 50%)`;
+        const hslColor2 = `hsl(${(angle * (i + 3)) % 360}, 100%, 50%)`;
+        geometryColors.push(hslColor1, hslColor2);
+    }
+
+
+    for (let i = 1; i < n; i++) {
+        let hsvColor = {h:(angle * i) % 360, }
+        const dhslColor = rgbToHex(HSVtoRGB());
+        geometryColors.push(hslColor);
+    }
+
+    return geometryColors;
+}
+
+function generateComplementary(color) {
+    return generateGeometricalColors(color, n, 180);
+}
+
+function generateTriadic(color, n) {
+    return generateGeometricalColors(color, n, 120);
+}
+
+function generateSquare(color, n) {
+    return generateGeometricalColors(color, n, 90);
+}
+
+function generateRectangle(color, n) {
+    return generateGeometricalColors(color, n, 60, true);
+}
+
+const startingColor = "#FF0000";
+const numberOfColors = 5;
+
+const monochromatic = generateMonochromatic(startingColor, numberOfColors);
+const analogous = generateAnalogous(startingColor, numberOfColors);
+const complementary = generateComplementary(startingColor);
+const splitComplementary = generateSplitComplementary(startingColor);
+const triadic = generateTriadic(startingColor, numberOfColors);
+const square = generateSquare(startingColor, numberOfColors);
+const rectangle = generateRectangle(startingColor, numberOfColors);
+
+console.log("Monochromatic:", monochromatic);
+console.log("Analogous:", analogous);
+console.log("Complementary:", complementary);
+console.log("Split Complementary:", splitComplementary);
+console.log("Triadic:", triadic);
+console.log("Square:", square);
+console.log("Rectangle:", rectangle);
