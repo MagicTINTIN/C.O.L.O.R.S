@@ -357,7 +357,7 @@ body {
     background-color: darkgray;
 }
 
-.typeChoice input:checked+label {
+.typeChoice input:checked~label {
     box-shadow: 0 0 10px green;
     color: white;
     background-color: darkgreen;

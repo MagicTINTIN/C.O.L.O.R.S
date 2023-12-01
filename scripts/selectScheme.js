@@ -1,7 +1,9 @@
-var matches = document.querySelectorAll('.schemeSelection');
-
-for (match in matches) {
-  matches[match].onchange = function() {
-    console.log(this.value)
-  }
-}
+document.addEventListener("DOMContentLoaded", function() {
+    var matches = document.querySelectorAll('.schemeSelection');
+  
+    matches.forEach(function(match) {
+      match.addEventListener('change', function() {
+        console.log(this.value);
+      });
+    });
+  });
