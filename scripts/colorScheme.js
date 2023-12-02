@@ -19,7 +19,6 @@ const RECTANGLE_DISTRIBUTION = 4;
 const VARIATION_FACTOR = 0.75;
 
 function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, cycleSize = 360 / angle) {
-    console.log("Cycle size:", cycleSize);
     const prefix = base.startsWith("#");
     const rgbBase = hexToRgb((prefix ? "" : "#") + base);
     const hsvBase = RGBtoHSV(rgbBase)
@@ -37,12 +36,10 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
         maxVariations = minVariations + (hasVariations ? 1 : 0);
         maxVariationsUntil = cycleSize - (maxVariations * cycleSize - n);
     }
-    console.log(base, " min max until has", minVariations, maxVariations, maxVariationsUntil, hasVariations);
 
-    if (type == UNIFORM_DISTRIBUTION || true) {
+    if (type == UNIFORM_DISTRIBUTION) {
         if (cycleSize > 0) {
             for (let varnb = 1; varnb < maxVariations; varnb++) {
-                console.log(base, "adding init var", varnb);
                 let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
                 const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
                     if (prefix)
@@ -54,7 +51,6 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
                 let nbvariations = colornb < maxVariationsUntil ? maxVariations : minVariations;
 
                 for (let varnb = 0; varnb < nbvariations; varnb++) {
-                    console.log(base, "adding var", varnb, "to color", colornb);
                     let hsvColor = { h: (baseHue + angle * colornb) % 360, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
                     const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
                     if (prefix)
@@ -76,9 +72,13 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
         }
     }
     else if (type == MONOCHROMATIC_DISTRIBUTION) {
-        for (let i = 0; i < n; i++) {
-            const newColor = rgbToHex(r, g, b + i * step);
-            monochromaticColors.push(newColor);
+        for (let varnb = 1; varnb < n; varnb++) {
+            let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+                if (prefix)
+                    geometryColors.push(newColor);
+                else
+                    geometryColors.push(newColor.replace("#", ""));
         }
     }
     else if (type == RECTANGLE_DISTRIBUTION) {
@@ -138,7 +138,7 @@ function generateAnalogous(color, n, angleStep = 30) {
 let startingColor = "#FF0000";
 const numberOfColors = 5;
 
-// const monochromatic = generateMonochromatic(startingColor, numberOfColors);
+const monochromatic = generateMonochromatic(startingColor, numberOfColors);
 // const analogous = generateAnalogous(startingColor, numberOfColors);
 const complementary = generateComplementary(startingColor, numberOfColors);
 // const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
@@ -146,7 +146,7 @@ const triadic = generateTriadic(startingColor, numberOfColors);
 const square = generateSquare(startingColor, numberOfColors);
 // const rectangle = generateRectangle(startingColor, numberOfColors);
 
-// console.log("Monochromatic:", monochromatic);
+console.log("Monochromatic:", monochromatic);
 // console.log("Analogous:", analogous);
 console.log("Complementary:", complementary);
 // console.log("Split Complementary:", splitComplementary);
