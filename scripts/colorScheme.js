@@ -97,9 +97,25 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
 
     }
     else if (type == ANALOGOUS_DISTRIBUTION) {
-        for (let i = 0; i < n; i++) {
-            const hslColor = `hsl(${(i * angleStep) % 360}, 100%, 50%)`;
-            analogousColors.push(hslColor);
+        let before = Math.floor((n-1) / 2);
+        let after = before + ((n-1) % 2 == 0?  0 : 1);
+
+        for (let anb = 1; anb < after + 1; anb++) {
+            let hsvColor = { h: (baseHue + angle * anb / after) % 360, s: baseSat, v: baseVal }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
+        }
+
+        for (let anb = 1; anb < before + 1; anb++) {
+            let hsvColor = { h: (baseHue - angle * anb / before) % 360, s: baseSat, v: baseVal }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
         }
     }
 
@@ -130,16 +146,16 @@ function generateSplitComplementary(color, n, angle = 30) {
     return generateGeometricalColors(color, n, angle, SPLIT_COMP_DISTRIBUTION, 3);
 }
 
-function generateAnalogous(color, n, angleStep = 30) {
-    return generateGeometricalColors(color, n, angleStep, ANALOGOUS_DISTRIBUTION, -1);
+function generateAnalogous(color, n, angleMax = 36) {
+    return generateGeometricalColors(color, n, angleMax, ANALOGOUS_DISTRIBUTION, -1);
 }
 
 
 let startingColor = "#FF0000";
-const numberOfColors = 5;
+const numberOfColors = 6;
 
 const monochromatic = generateMonochromatic(startingColor, numberOfColors);
-// const analogous = generateAnalogous(startingColor, numberOfColors);
+const analogous = generateAnalogous(startingColor, numberOfColors);
 const complementary = generateComplementary(startingColor, numberOfColors);
 // const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
 const triadic = generateTriadic(startingColor, numberOfColors);
@@ -147,7 +163,7 @@ const square = generateSquare(startingColor, numberOfColors);
 // const rectangle = generateRectangle(startingColor, numberOfColors);
 
 console.log("Monochromatic:", monochromatic);
-// console.log("Analogous:", analogous);
+console.log("Analogous:", analogous);
 console.log("Complementary:", complementary);
 // console.log("Split Complementary:", splitComplementary);
 console.log("Triadic:", triadic);
