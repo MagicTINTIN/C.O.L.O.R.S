@@ -5,16 +5,18 @@ const schemesIDs = {
     analogousValue: 2,
     complementaryValue: 3,
     splitcomplementaryValue: 4,
-    triadicValue: 5,
-    squareValue: 6,
-    rectangleValue: 7,
+    doublesplitcomplementaryValue: 5,
+    triadicValue: 6,
+    squareValue: 7,
+    rectangleValue: 8,
 }
 
 const UNIFORM_DISTRIBUTION = 0;
 const MONOCHROMATIC_DISTRIBUTION = 1;
 const ANALOGOUS_DISTRIBUTION = 2;
-const SPLIT_COMP_DISTRIBUTION = 3;
-const RECTANGLE_DISTRIBUTION = 4;
+const RECTANGLE_DISTRIBUTION = 3;
+const SPLIT_COMP_DISTRIBUTION = 4;
+const SPLIT_COMP_DOUBLE_DISTRIBUTION = 5;
 
 const VARIATION_FACTOR = 0.75;
 
@@ -81,21 +83,6 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
                     geometryColors.push(newColor.replace("#", ""));
         }
     }
-    else if (type == RECTANGLE_DISTRIBUTION) {
-        for (let i = 1; i < n / 2; i++) {
-            const hslColor1 = `hsl(${(angle * i) % 360}, 100%, 50%)`;
-            const hslColor2 = `hsl(${(angle * (i + 3)) % 360}, 100%, 50%)`;
-            geometryColors.push(hslColor1, hslColor2);
-        }
-    }
-    else if (type == SPLIT_COMP_DISTRIBUTION) {
-        const splitComplementaryColors = [
-            color,
-            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(180 - angle) % 360}, 100%, 50%)`
-        ];
-
-    }
     else if (type == ANALOGOUS_DISTRIBUTION) {
         let before = Math.floor((n-1) / 2);
         let after = before + ((n-1) % 2 == 0?  0 : 1);
@@ -116,6 +103,38 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
                 geometryColors.push(newColor);
             else
                 geometryColors.push(newColor.replace("#", ""));
+        }
+    }
+
+    else if (type == RECTANGLE_DISTRIBUTION) {
+        for (let i = 1; i < n / 2; i++) {
+            const hslColor1 = `hsl(${(angle * i) % 360}, 100%, 50%)`;
+            const hslColor2 = `hsl(${(angle * (i + 3)) % 360}, 100%, 50%)`;
+            geometryColors.push(hslColor1, hslColor2);
+        }
+    }
+    else if (type == SPLIT_COMP_DISTRIBUTION) {
+        const splitComplementaryColors = [
+            color,
+            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
+            `hsl(${(180 - angle) % 360}, 100%, 50%)`
+        ];
+
+    }
+    else if (type == SPLIT_COMP_DOUBLE_DISTRIBUTION) {
+        const splitComplementaryColors = [
+            color,
+            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
+            `hsl(${(180 - angle) % 360}, 100%, 50%)`
+            `hsl(${(0 + angle) % 360}, 100%, 50%)`,
+            `hsl(${(0 - angle) % 360}, 100%, 50%)`
+        ];
+
+    }
+    else {
+        // by default push only base color
+        for (let varnb = 1; varnb < n; varnb++) {
+            geometryColors.push(base);
         }
     }
 
@@ -144,6 +163,10 @@ function generateMonochromatic(color, n) {
 
 function generateSplitComplementary(color, n, angle = 30) {
     return generateGeometricalColors(color, n, angle, SPLIT_COMP_DISTRIBUTION, 3);
+}
+
+function generateSplitComplementaryDouble(color, n, angle = 30) {
+    return generateGeometricalColors(color, n, angle, SPLIT_COMP_DOUBLE_DISTRIBUTION, 5);
 }
 
 function generateAnalogous(color, n, angleMax = 36) {
