@@ -1,5 +1,5 @@
 window.schemeUsed = 0
-schemesIDs = {
+const schemesIDs = {
     randomValue: 0,
     monochromaticValue: 1,
     analogousValue: 2,

@@ -14,7 +14,7 @@ document.getElementById("body").addEventListener("keyup", (e) => {
     if (e.key === " ")
         generateNewColors();
     if (e.key == "Escape")
-        selectMethod();
+        toggleSettings();
     if (e.key == "Control")
         toggleOptions();
     if (e.key.toUpperCase() == "O")
@@ -217,28 +217,28 @@ function updateColorHex(object) {
     updateColors();
 }
 
-window.displayRules = false;
-function selectMethod() {
-    window.displayRules = !window.displayRules;
-    if (window.displayRules)
-        showMethods();
+window.displaySettings = false;
+function toggleSettings() {
+    window.displaySettings = !window.displaySettings;
+    if (window.displaySettings)
+        showSettings();
     else
-        hideMethods();
+        hideSettings();
 
 }
 
-function showMethods() {
-    const rulesbg = document.getElementById("rulesBackground");
-    const rules = document.getElementById("rulesPanel");
-    rulesbg.style.transform = "scale(1.1)";
-    rules.style.transform = "scale(1)";
+function showSettings() {
+    const settingsbg = document.getElementById("settingsBackground");
+    const settings = document.getElementById("settingsPanel");
+    settingsbg.style.transform = "scale(1.1)";
+    settings.style.transform = "scale(1)";
 }
 
-function hideMethods() {
-    const rulesbg = document.getElementById("rulesBackground");
-    const rules = document.getElementById("rulesPanel");
-    rulesbg.style.transform = "scale(0)";
-    rules.style.transform = "scale(0)";
+function hideSettings() {
+    const settingsbg = document.getElementById("settingsBackground");
+    const settings = document.getElementById("settingsPanel");
+    settingsbg.style.transform = "scale(0)";
+    settings.style.transform = "scale(0)";
 }
 
 window.displayOptions = false;

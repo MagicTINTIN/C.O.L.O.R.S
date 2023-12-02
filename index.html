@@ -91,7 +91,7 @@
       <span class="btnDescription">Selec. Only</span>
       <span class="btnKey">O</span>
     </span>
-    <span id="selectButton" class="navButton" onclick="selectMethod()"><span class="btnIcon">⚙</span><span
+    <span id="selectButton" class="navButton" onclick="toggleSettings()"><span class="btnIcon">⚙</span><span
         class="btnDescription">More</span><span class="btnKey">Esc</span></span>
     <span id="closeOptions" class="navButton" onclick="toggleOptions()"><span class="btnIcon">×</span><span
         class="btnDescription">Close</span><span class="btnKey">Ctrl</span></span>
@@ -107,47 +107,68 @@
       rerender="ActivePBS,errormsg" />
   </apex:pageBlockSection>
 
-  <div id="rulesBackground" onclick="selectMethod()">
-    <div onclick="hideMethods()" id="closeRules"><span>×</span></div>
-    <div id="rulesPanel" onclick="event.stopPropagation()">
-      <h1 id="rulesTitle">Choose a method to generate palettes</h1>
-      <h3 id="rulesSubTitle">(not working for the moment)</h3>
-      <div class="ruleSpace"></div>
-      <div id="rulesChoices">
-        <div class="typeChoice">
-          <input type="radio" checked="checked" class="schemeSelection" name="chooseScheme" value="randomValue" id="randomValue">
-          <label for="randomValue">Random</label>
+  <div id="settingsBackground" onclick="toggleSettings()">
+    <div onclick="hideSettings()" id="closeSettings"><span>×</span></div>
+    <div id="settingsPanel" onclick="event.stopPropagation()">
+      <h1 id="settingsTitle" class="settingsTitle">Settings</h1>
+      <div id="settingsContent">
+        <h2 id="rulesTitle" class="settingsTitle">Choose a method to generate palettes</h2>
+        <h3 id="rulesSubTitle" class="settingsSubtitle">(not working for the moment)</h3>
+        <div class="ruleSpace"></div>
+        <div id="rulesChoices">
+          <div class="typeChoice">
+            <input type="radio" checked="checked" class="schemeSelection" name="chooseScheme" value="randomValue"
+              id="randomValue">
+            <label for="randomValue">Random</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="monochromaticValue"
+              id="monochromaticValue">
+            <label for="monochromaticValue">Monochromatic</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="analogousValue" id="analogousValue">
+            <label for="analogousValue">Analogous</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="complementaryValue"
+              id="complementaryValue">
+            <label for="complementaryValue">Complementary</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="splitcomplementaryValue"
+              id="splitcomplementaryValue">
+            <label for="splitcomplementaryValue">Split Complementary</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="triadicValue" id="triadicValue">
+            <label for="triadicValue">Triadic</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="squareValue" id="squareValue">
+            <label for="squareValue">Square</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="rectangleValue" id="rectangleValue">
+            <label for="rectangleValue">Rectangle</label>
+          </div>
         </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="monochromaticValue" id="monochromaticValue">
-          <label for="monochromaticValue">Monochromatic</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="analogousValue" id="analogousValue">
-          <label for="analogousValue">Analogous</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="complementaryValue" id="complementaryValue">
-          <label for="complementaryValue">Complementary</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="splitcomplementaryValue" id="splitcomplementaryValue">
-          <label for="splitcomplementaryValue">Split Complementary</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="triadicValue" id="triadicValue">
-          <label for="triadicValue">Triadic</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="squareValue" id="squareValue">
-          <label for="squareValue">Square</label>
-        </div>
-        <div class="typeChoice">
-          <input type="radio" class="schemeSelection" name="chooseScheme" value="rectangleValue" id="rectangleValue">
-          <label for="rectangleValue">Rectangle</label>
+
+        <h2 id="hueTypeTitle" class="settingsTitle">Choose a hue type</h2>
+        <h3 id="hueTypeSubTitle" class="settingsSubtitle">(not working for the moment)</h3>
+        <div id="hueTypeChoices">
+          <div class="typeChoice">
+            <input type="radio" checked="checked" class="hueTypeSelection" name="chooseHue" value="normalHueType"
+              id="normalHueType">
+            <label for="normalHueType">Normal</label>
+          </div>
+          <div class="typeChoice">
+            <input type="radio" class="hueTypeSelection" name="chooseHue" value="adobeHueType" id="adobeHueType">
+            <label for="adobeHueType">Adobe</label>
+          </div>
         </div>
       </div>
-      <div class="ruleLargeSpace"></div>
+      <!-- <div class="ruleLargeSpace"></div> -->
     </div>
   </div>
 

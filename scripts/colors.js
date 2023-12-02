@@ -114,6 +114,12 @@ function isValidHexColor(hex) {
     return hexRegex.test(checkHex);
 }
 
+window.hueType = 0;
+const hueTypeIDs = {
+    normalHueType: 0,
+    adobeHueType: 1
+}
+
 RGBtoHSV = function (color) {
     var r, g, b, h, s, v;
     r = color.r / 255;
