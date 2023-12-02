@@ -114,7 +114,7 @@ function isValidHexColor(hex) {
     return hexRegex.test(checkHex);
 }
 
-window.hueType = 0;
+window.hueType = 1;
 const hueTypeIDs = {
     normalHueType: 0,
     adobeHueType: 1

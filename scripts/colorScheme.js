@@ -30,6 +30,9 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION) 
         for (let i = 1; i < n; i++) {
             let hsvColor = { h: (baseHue + angle * i) % 360, s:colorSat, v:colorVal}
             const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            console.log("Hue Type:", window.hueType);
+            console.log("BaseColor:",base, "BaseHue:", hsvBase);
+            console.log("NewColor:",base, "BaseHue:", hsvColor);
             if (prefix)
                 geometryColors.push(newColor);
             else
@@ -99,18 +102,18 @@ function generateAnalogous(color, n, angleStep = 30) {
 const startingColor = "#FF0000";
 const numberOfColors = 5;
 
-const monochromatic = generateMonochromatic(startingColor, numberOfColors);
-const analogous = generateAnalogous(startingColor, numberOfColors);
+// const monochromatic = generateMonochromatic(startingColor, numberOfColors);
+// const analogous = generateAnalogous(startingColor, numberOfColors);
 const complementary = generateComplementary(startingColor, numberOfColors);
-const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
-const triadic = generateTriadic(startingColor, numberOfColors);
-const square = generateSquare(startingColor, numberOfColors);
-const rectangle = generateRectangle(startingColor, numberOfColors);
+// const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
+// const triadic = generateTriadic(startingColor, numberOfColors);
+// const square = generateSquare(startingColor, numberOfColors);
+// const rectangle = generateRectangle(startingColor, numberOfColors);
 
-console.log("Monochromatic:", monochromatic);
-console.log("Analogous:", analogous);
+// console.log("Monochromatic:", monochromatic);
+// console.log("Analogous:", analogous);
 console.log("Complementary:", complementary);
-console.log("Split Complementary:", splitComplementary);
-console.log("Triadic:", triadic);
-console.log("Square:", square);
-console.log("Rectangle:", rectangle);
+// console.log("Split Complementary:", splitComplementary);
+// console.log("Triadic:", triadic);
+// console.log("Square:", square);
+// console.log("Rectangle:", rectangle);
