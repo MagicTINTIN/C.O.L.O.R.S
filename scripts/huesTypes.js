@@ -96,7 +96,6 @@ function classicHSVtoRGB(color) {
 
 function adobeHSVtoRGB(color) {
     let newHue = 0
-    console.log("before correction:", color.h);
     if (color.h < ADOBE_Y)
         newHue = scale([ADOBE_R, ADOBE_Y], [NORMAL_R, NORMAL_Y])(color.h);
     else if (color.h < ADOBE_G)
@@ -110,7 +109,6 @@ function adobeHSVtoRGB(color) {
     else
         newHue = scale([ADOBE_M, HUE_MAX], [NORMAL_M, HUE_MAX])(color.h);
     newHue %= 360;
-    console.log("after correction:", newHue);
     color.h = newHue;
     return classicHSVtoRGB(color);
 }
@@ -153,8 +151,6 @@ function classicRGBtoHSV(color) {
 
 function adobeRGBtoHSV(color) {
     let hsv = classicRGBtoHSV(color);
-    console.log("normal (before adobe):", hsv.h);
-    console.log("Scaling 0 ?", scale([0, 60], [0, 120])(0));
     let newHue = 0;
     if (hsv.h < NORMAL_Y)
         newHue = scale([NORMAL_R, NORMAL_Y], [ADOBE_R, ADOBE_Y])(hsv.h);
@@ -169,6 +165,5 @@ function adobeRGBtoHSV(color) {
     else
         newHue = scale([NORMAL_M, HUE_MAX], [ADOBE_M, HUE_MAX])(hsv.h);
     newHue %= 360;
-    console.log("adobe value:", newHue);
     return { h: newHue, s: hsv.s, v: hsv.v };
 }
