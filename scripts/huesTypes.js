@@ -96,19 +96,21 @@ function classicHSVtoRGB(color) {
 
 function adobeHSVtoRGB(color) {
     let newHue = 0
+    console.log("before correction:", color.h);
     if (color.h < ADOBE_Y)
         newHue = scale([ADOBE_R, ADOBE_Y], [NORMAL_R, NORMAL_Y])(color.h);
-    if (color.h < ADOBE_G)
+    else if (color.h < ADOBE_G)
         newHue = scale([ADOBE_Y, ADOBE_G], [NORMAL_Y, NORMAL_G])(color.h);
-    if (color.h < ADOBE_C)
+    else if (color.h < ADOBE_C)
         newHue = scale([ADOBE_G, ADOBE_C], [NORMAL_G, NORMAL_C])(color.h);
-    if (color.h < ADOBE_B)
+    else if (color.h < ADOBE_B)
         newHue = scale([ADOBE_C, ADOBE_B], [NORMAL_C, NORMAL_B])(color.h);
-    if (color.h < ADOBE_M)
+    else if (color.h < ADOBE_M)
         newHue = scale([ADOBE_B, ADOBE_M], [NORMAL_B, NORMAL_M])(color.h);
     else
         newHue = scale([ADOBE_M, HUE_MAX], [NORMAL_M, HUE_MAX])(color.h);
     newHue %= 360;
+    console.log("after correction:", newHue);
     color.h = newHue;
     return classicHSVtoRGB(color);
 }
@@ -151,19 +153,22 @@ function classicRGBtoHSV(color) {
 
 function adobeRGBtoHSV(color) {
     let hsv = classicRGBtoHSV(color);
+    console.log("normal (before adobe):", hsv.h);
+    console.log("Scaling 0 ?", scale([0, 60], [0, 120])(0));
     let newHue = 0;
     if (hsv.h < NORMAL_Y)
         newHue = scale([NORMAL_R, NORMAL_Y], [ADOBE_R, ADOBE_Y])(hsv.h);
-    if (hsv.h < NORMAL_G)
+    else if (hsv.h < NORMAL_G)
         newHue = scale([NORMAL_Y, NORMAL_G], [ADOBE_Y, ADOBE_G])(hsv.h);
-    if (hsv.h < NORMAL_C)
+    else if (hsv.h < NORMAL_C)
         newHue = scale([NORMAL_G, NORMAL_C], [ADOBE_G, ADOBE_C])(hsv.h);
-    if (hsv.h < NORMAL_B)
+    else if (hsv.h < NORMAL_B)
         newHue = scale([NORMAL_C, NORMAL_B], [ADOBE_C, ADOBE_B])(hsv.h);
-    if (hsv.h < NORMAL_M)
+    else if (hsv.h < NORMAL_M)
         newHue = scale([NORMAL_B, NORMAL_M], [ADOBE_B, ADOBE_M])(hsv.h);
     else
         newHue = scale([NORMAL_M, HUE_MAX], [ADOBE_M, HUE_MAX])(hsv.h);
     newHue %= 360;
+    console.log("adobe value:", newHue);
     return { h: newHue, s: hsv.s, v: hsv.v };
 }

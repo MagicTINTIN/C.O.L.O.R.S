@@ -31,8 +31,8 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION) 
             let hsvColor = { h: (baseHue + angle * i) % 360, s:colorSat, v:colorVal}
             const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
             console.log("Hue Type:", window.hueType);
-            console.log("BaseColor:",base, "BaseHue:", hsvBase);
-            console.log("NewColor:",base, "BaseHue:", hsvColor);
+            console.log("BaseColor:",base, "BaseHue:", hsvBase.h);
+            console.log("NewColor:",base, "BaseHue:", hsvColor.h);
             if (prefix)
                 geometryColors.push(newColor);
             else
@@ -99,8 +99,8 @@ function generateAnalogous(color, n, angleStep = 30) {
 }
 
 
-const startingColor = "#FF0000";
-const numberOfColors = 5;
+let startingColor = "#FF0000";
+const numberOfColors = 2;
 
 // const monochromatic = generateMonochromatic(startingColor, numberOfColors);
 // const analogous = generateAnalogous(startingColor, numberOfColors);
@@ -117,3 +117,8 @@ console.log("Complementary:", complementary);
 // console.log("Triadic:", triadic);
 // console.log("Square:", square);
 // console.log("Rectangle:", rectangle);
+console.log("Testing green");
+
+startingColor = "#00FF00";
+const complementary2 = generateComplementary(startingColor, numberOfColors);
+console.log("Complementary:", complementary2);
