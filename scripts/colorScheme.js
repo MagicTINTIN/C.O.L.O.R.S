@@ -10,23 +10,30 @@ schemesIDs = {
     rectangleValue: 7,
 }
 
-const NORMAL_DISTRIBUTION = 0;
+const UNIFORM_DISTRIBUTION = 0;
 const MONOCHROMATIC_DISTRIBUTION = 1;
 const ANALOGOUS_DISTRIBUTION = 2;
 const SPLIT_COMP_DISTRIBUTION = 3;
 const RECTANGLE_DISTRIBUTION = 4;
 
-function generateGeometricalColors(base, n, angle, type = NORMAL_DISTRIBUTION) {
-    const baseColor = hexToRgb(base);
-    const hsvBase = RGBtoHSV(baseColor)
+function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION) {
+    const prefix = base.startsWith("#");
+    const rgbBase = hexToRgb((prefix ? "" : "#") + base);
+    const hsvBase = RGBtoHSV(rgbBase)
 
-    const geometryColors = [color];
+    const geometryColors = [base];
+    const baseHue = hsvBase.h;
+    let colorSat = hsvBase.s;
+    let colorVal = hsvBase.v;
 
-    if (type == NORMAL_DISTRIBUTION) {
+    if (type == UNIFORM_DISTRIBUTION || true) {
         for (let i = 1; i < n; i++) {
-            let hsvColor = { h: (angle * i) % 360, }
-            const dhslColor = rgbToHex(HSVtoRGB());
-            geometryColors.push(hslColor);
+            let hsvColor = { h: (baseHue + angle * i) % 360, s:colorSat, v:colorVal}
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
         }
     }
     else if (type == MONOCHROMATIC_DISTRIBUTION) {
@@ -60,7 +67,7 @@ function generateGeometricalColors(base, n, angle, type = NORMAL_DISTRIBUTION) {
     return geometryColors;
 }
 
-function generateComplementary(color) {
+function generateComplementary(color, n) {
     return generateGeometricalColors(color, n, 180);
 }
 
@@ -80,7 +87,7 @@ function generateMonochromatic(color, n) {
     return generateGeometricalColors(color, n, 0, MONOCHROMATIC_DISTRIBUTION);
 }
 
-function generateSplitComplementary(color, angle = 30) {
+function generateSplitComplementary(color, n, angle = 30) {
     return generateGeometricalColors(color, n, angle, SPLIT_COMP_DISTRIBUTION);
 }
 
@@ -94,8 +101,8 @@ const numberOfColors = 5;
 
 const monochromatic = generateMonochromatic(startingColor, numberOfColors);
 const analogous = generateAnalogous(startingColor, numberOfColors);
-const complementary = generateComplementary(startingColor);
-const splitComplementary = generateSplitComplementary(startingColor);
+const complementary = generateComplementary(startingColor, numberOfColors);
+const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
 const triadic = generateTriadic(startingColor, numberOfColors);
 const square = generateSquare(startingColor, numberOfColors);
 const rectangle = generateRectangle(startingColor, numberOfColors);
