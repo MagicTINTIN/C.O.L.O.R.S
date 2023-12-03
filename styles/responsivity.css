@@ -1,0 +1,169 @@
+
+@media screen and (orientation:landscape) {
+    #openControl {
+        opacity: .5;
+    }
+
+    #panelControl {
+        width: 50vw;
+        height: 7vh;
+        border-radius: 3.5vh;
+        left: 25vw;
+        bottom: 30px;
+        box-sizing: border-box;
+    }
+
+    #moreControl {
+        width: 50vw;
+        height: 7vh;
+        border-radius: 3.5vh;
+        left: 25vw;
+        bottom: calc(40px + 7vh);
+        box-sizing: border-box;
+    }
+
+    #logoNavBar {
+        width: calc(7vh - 10px);
+        height: calc(7vh - 10px);
+    }
+
+    .navButton {
+        font-size: calc(7vh - 35px);
+    }
+
+    .btnDisabled {
+        font-size: calc(7vh - 35px);
+    }
+
+
+    .labelValue {
+        font-size: calc(7vh - 35px);
+        width: calc(7vh - 35px);
+        height: calc(7vh - 35px);
+    }
+
+    .labelButton {
+        font-size: calc(7vh - 35px);
+        width: calc(7vh - 35px);
+        height: calc(7vh - 35px);
+    }
+}
+
+@media screen and (orientation:portrait) {
+    #panelControl {
+        width: 90vw;
+        height: 5vh;
+        border-radius: 2.5vh;
+        left: 5vw;
+        bottom: 0px;
+        box-sizing: border-box;
+    }
+
+    #moreControl {
+        width: 90vw;
+        height: 5vh;
+        border-radius: 2.5vh;
+        left: 5vw;
+        bottom: calc(5vh + 10px);
+        box-sizing: border-box;
+    }
+
+    #logoNavBar {
+        width: calc(5vh - 10px);
+        height: calc(5vh - 10px);
+    }
+
+    .btnKey {
+        display: none;
+    }
+
+    .navButton {
+        font-size: calc(5vh - 20px);
+    }
+
+    .btnDisabled {
+        font-size: calc(5vh - 20px);
+    }
+
+
+    .labelValue {
+        font-size: calc(5vh - 20px);
+        width: calc(5vh - 20px);
+        height: calc(5vh - 20px);
+    }
+
+    .labelButton {
+        font-size: calc(5vh - 25px);
+        width: calc(5vh - 25px);
+        height: calc(5vh - 25px);
+    }
+}
+
+@media screen and (max-height: 800px) {
+
+    .btnKey {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    .genDescriptionChoice {
+        display: none;
+    }
+    #panelGenChoices {
+        width: 90vw;
+    }
+    #panelGen, #panelGenChoices {
+        height: 4vh;
+    }
+    .genIconChoice {
+        font-size: calc(4vh - 5px);
+    }
+
+}
+
+@media screen and ((max-height: 660px) or ((orientation:portrait) and (max-height: 900px))) {
+
+    #panelGen {
+        opacity: 1;
+    }
+
+    .genDescriptionChoice {
+        display: none;
+    }
+    #panelGenChoices {
+        width: 90vw;
+    }
+    #panelGen, #panelGenChoices {
+        height: 4vh;
+    }
+    .genIconChoice {
+        font-size: calc(4vh - 5px);
+    }
+
+    .btnDescription {
+        display: none;
+    }
+
+    .navButton {
+        font-size: calc(7vh - 10px);
+    }
+
+    .btnDisabled {
+        font-size: calc(7vh - 10px);
+    }
+
+    .labelValue {
+        font-size: min(max(calc(7vh - 20px), 6vh), 5vw);
+        width: min(max(calc(7vh - 20px), 6vh), 5vw);
+        height: min(max(calc(7vh - 20px), 6vh), 5vw);
+    }
+
+    .labelButton {
+        font-size: min(max(calc(7vh - 25px), 5vh), 4vw);
+        width: min(max(calc(7vh - 25px), 5vh), 4vw);
+        height: min(max(calc(7vh - 25px), 5vh), 4vw);
+    }
+}

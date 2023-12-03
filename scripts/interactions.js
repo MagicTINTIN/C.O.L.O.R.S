@@ -255,12 +255,23 @@ function toggleOptions() {
 
 function showOptions() {
     const optionsDiv = document.getElementById("moreControl");
+    const genDivChoice = document.getElementById("panelGenChoices");
+    const genDiv = document.getElementById("panelGen");
+    
     optionsDiv.style.transform = "translateY(0px)";
+    genDivChoice.style.transform = "translate(-50%, 0)";
+    genDiv.style.transform = "translate(-50%, 0) scaleY(0)";
+
 }
 
 function hideOptions() {
     const optionsDiv = document.getElementById("moreControl");
+    const genDivChoice = document.getElementById("panelGenChoices");
+    const genDiv = document.getElementById("panelGen");
+
     optionsDiv.style.transform = "translateY(calc( 20vh + 30px ))";
+    genDivChoice.style.transform = "translate(-50%,calc( -20vh - 30px ))";
+    genDiv.style.transform = "translate(-50%, 0)";
 }
 
 hideOptions()

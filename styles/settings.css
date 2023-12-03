@@ -1,0 +1,187 @@
+
+#settingsBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 90000;
+    background-color: #00000088;
+    display: flex;
+    transform: scale(0);
+    /* filter: blur(max(20vh, 20vw)); */
+    border-radius: min(5vh, 5vw);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    justify-content: space-around;
+
+    transition: all .2s;
+}
+
+#closeSettings {
+    filter: none;
+    position: fixed;
+    top: calc(10vh + min(5vh, 5vw));
+    right: calc(10vw + min(5vh, 5vw));
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    transform: scale(1);
+    transition: all .3s;
+
+    cursor: pointer;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    z-index: 199999;
+}
+
+#closeSettings:hover {
+    text-shadow: 0 0 5px gray;
+    transform: scale(1.2);
+}
+
+#closeSettings:active {
+    text-shadow: 0 0 5px gray;
+    transform: scale(1.1);
+}
+
+#settingsPanel {
+    filter: none;
+    box-shadow: 8px 8px 15px #00000099;
+    color: black;
+    width: 80vw;
+    height: 80vh;
+
+    padding: 5px 10vw;
+
+    box-sizing: border-box;
+    margin: auto;
+    background-color: white;
+    border-radius: min(10vh, 10vw);
+
+    transform: scale(0);
+
+    transition: all .5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#settingsContent {
+    width: 60vw;
+    height:60vh;
+    max-height: 60vh;
+
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+
+.settingsInfo {
+    text-align: center;
+    font-family: 'Lucida Console', monospace;
+}
+
+.settingsTitle {
+    font-size: 2vh;
+    text-align: center;
+    font-family: 'Lucida Console', monospace;
+
+    cursor: default;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.settingsSubtitle {
+    padding-left: min(10vh, 10vw);
+    padding-right: min(10vh, 10vw);
+    font-size: 1vh;
+    text-align: center;
+    font-family: 'Lucida Console', monospace;
+
+    cursor: default;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    color: gray;
+}
+
+.ruleSpace {
+    height: 5vh;
+}
+
+.ruleLargeSpace {
+    height: calc(10vw + min(5vh, 5vw));
+}
+
+#rulesChoices,
+#hueTypeChoices {
+    display: flex;
+    flex-direction: column;
+}
+
+.typeChoice {
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.typeChoice input {
+    visibility: hidden;
+    width: 0;
+}
+
+.typeChoice label {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: lightgray;
+    border-radius: 7px;
+    box-sizing: border-box;
+    padding: 8px;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    transition: all .3s;
+
+    color: black;
+    font-weight: bold;
+}
+
+.typeChoice label:hover {
+    background-color: darkgray;
+}
+
+.typeChoice input:checked~label {
+    box-shadow: 0 0 10px green;
+    color: white;
+    background-color: darkgreen;
+}
