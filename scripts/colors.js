@@ -1,10 +1,23 @@
 window.hueType = 0;
-window.schemeUsed = 0
+window.schemeUsed = 0;
 
 const hueTypeIDs = {
     normalHueType: 0,
     adobeHueType: 1
 }
+
+const schemesbyID = [
+    "randomValue",
+    "monochromaticValue",
+    "analogousValue",
+    "complementaryValue",
+    "splitcomplementaryValue",
+    "doublesplitcomplementaryValue",
+    "compoundValue",
+    "triadicValue",
+    "squareValue",
+    "rectangleValue"
+];
 
 const schemesIDs = {
     randomValue: 0,
@@ -31,6 +44,41 @@ const schemesIcons = {
     squareValue: "◻",
     rectangleValue: "▭",
 }
+
+const schemesDescriptions = {
+    randomValue: "Random",
+    monochromaticValue: "Monochromatic",
+    analogousValue: "Analogous",
+    complementaryValue: "Complementary",
+    splitcomplementaryValue: "SplitCompl.",
+    doublesplitcomplementaryValue: "Dbl.Spl.Compl.",
+    compoundValue: "Compound",
+    triadicValue: "Triad",
+    squareValue: "Square",
+    rectangleValue: "Rectangle",
+}
+
+const schemesButtonIds = {
+    randomValue: "randomBtnGen",
+    monochromaticValue: "monochromaticBtnGen",
+    analogousValue: "analogousBtnGen",
+    complementaryValue: "complementaryBtnGen",
+    splitcomplementaryValue: "splitcomplementaryBtnGen",
+    doublesplitcomplementaryValue: "doublesplitcomplementaryBtnGen",
+    compoundValue: "compoundBtnGen",
+    triadicValue: "triadicBtnGen",
+    squareValue: "squareBtnGen",
+    rectangleValue: "rectangleBtnGen",
+}
+
+function setGenMethodDisplay(selected) {
+    document.getElementById(schemesButtonIds[schemesbyID[window.schemeUsed]]).classList.remove("selectedBtnGen");
+    document.getElementById(schemesButtonIds[selected]).classList.add("selectedBtnGen");
+    window.schemeUsed = schemesIDs[selected];
+    document.getElementById("iconGen").innerHTML = schemesIcons[selected];
+    document.getElementById("descriptionGen").innerHTML = schemesDescriptions[selected];
+}
+setGenMethodDisplay(schemesbyID[window.schemeUsed]);
 
 const RANDOM = 0;
 const MONOCHROMATIC = 1;

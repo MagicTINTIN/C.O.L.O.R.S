@@ -44,43 +44,43 @@
     </div>
   </div>
   <div id="panelGenChoices">
-    <div class="genChoice">
+    <div class="genChoice genButton" id="randomBtnGen" onclick="setGenMethodDisplay('randomValue')">
       <span class="genIconChoice">~</span>
       <span class="genDescriptionChoice">Random</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="monochromaticBtnGen" onclick="setGenMethodDisplay('monochromaticValue')">
       <span class="genIconChoice">⋯</span>
       <span class="genDescriptionChoice">Monochromatic</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="analogousBtnGen" onclick="setGenMethodDisplay('analogousValue')">
       <span class="genIconChoice">⦠</span>
       <span class="genDescriptionChoice">Analogous</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="complementaryBtnGen" onclick="setGenMethodDisplay('complementaryValue')">
       <span class="genIconChoice">-</span>
       <span class="genDescriptionChoice">Complementary</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="splitcomplementaryBtnGen" onclick="setGenMethodDisplay('splitcomplementaryValue')">
       <span class="genIconChoice">∹</span>
-      <span class="genDescriptionChoice">SplitCompl </span>
+      <span class="genDescriptionChoice">SplitCompl.</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="doublesplitcomplementaryBtnGen" onclick="setGenMethodDisplay('doublesplitcomplementaryValue')">
       <span class="genIconChoice">∺</span>
-      <span class="genDescriptionChoice">DoubleSplCompl</span>
+      <span class="genDescriptionChoice">Dbl.Spl.Compl.</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="compoundBtnGen" onclick="setGenMethodDisplay('compoundValue')">
       <span class="genIconChoice">⊼</span>
       <span class="genDescriptionChoice">Compound</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="triadicBtnGen" onclick="setGenMethodDisplay('triadicValue')">
       <span class="genIconChoice">△</span>
       <span class="genDescriptionChoice">Triad</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="squareBtnGen" onclick="setGenMethodDisplay('squareValue')">
       <span class="genIconChoice">◻</span>
       <span class="genDescriptionChoice">Square</span>
     </div>
-    <div class="genChoice">
+    <div class="genChoice genButton" id="rectangleBtnGen" onclick="setGenMethodDisplay('rectangleValue')">
       <span class="genIconChoice">▭</span>
       <span class="genDescriptionChoice">Rectangle</span>
     </div>
@@ -164,58 +164,6 @@
     <div id="settingsPanel" onclick="event.stopPropagation()">
       <h1 id="settingsTitle" class="settingsTitle">Settings</h1>
       <div id="settingsContent">
-        <h2 id="rulesTitle" class="settingsTitle">Choose a method to generate palettes</h2>
-        <!-- <h3 id="rulesSubTitle" class="settingsSubtitle">(not working for the moment)</h3> -->
-        <div class="ruleSpace"></div>
-        <div id="rulesChoices">
-          <div class="typeChoice">
-            <input type="radio" checked="checked" class="schemeSelection" name="chooseScheme" value="randomValue"
-              id="randomValue">
-            <label for="randomValue"><span class="genIconChoice">~</span> Random</label>
-          </div>
-          <h4 class="settingsInfo">The following methods will generate colors based on the first one of the row</h4>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="monochromaticValue"
-              id="monochromaticValue">
-            <label for="monochromaticValue"><span class="genIconChoice">⋯</span> Monochromatic</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="analogousValue" id="analogousValue">
-            <label for="analogousValue"><span class="genIconChoice">⦠</span> Analogous</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="complementaryValue"
-              id="complementaryValue">
-            <label for="complementaryValue"><span class="genIconChoice">-</span> Complementary</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="splitcomplementaryValue"
-              id="splitcomplementaryValue">
-            <label for="splitcomplementaryValue"><span class="genIconChoice">∹</span> Split Complementary</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="doublesplitcomplementaryValue"
-              id="doublesplitcomplementaryValue">
-            <label for="doublesplitcomplementaryValue"><span class="genIconChoice">∺</span> Double Split Complementary</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="compoundValue" id="compoundValue">
-            <label for="compoundValue"><span class="genIconChoice">⊼</span> Compound</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="triadicValue" id="triadicValue">
-            <label for="triadicValue"><span class="genIconChoice">△</span> Triad</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="squareValue" id="squareValue">
-            <label for="squareValue"><span class="genIconChoice">◻</span> Square</label>
-          </div>
-          <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="rectangleValue" id="rectangleValue">
-            <label for="rectangleValue"><span class="genIconChoice">▭</span> Rectangle</label>
-          </div>
-        </div>
-
         <h2 id="hueTypeTitle" class="settingsTitle">Choose a hue type</h2>
         <div id="hueTypeChoices">
           <div class="typeChoice">

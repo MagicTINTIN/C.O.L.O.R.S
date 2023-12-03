@@ -90,6 +90,12 @@
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+
+    transition: all .5s;
+}
+
+.genButton {
+    cursor: pointer;
 }
 
 .genIconChoice {
@@ -104,22 +110,22 @@
     transition: all .2s;
 }
 
+.selectedBtnGen, .selectedBtnGen .genIconChoice, .selectedBtnGen .genDescriptionChoice {
+    text-shadow: 0 0 5px #005500 !important;
+    color: #005500 !important;
+}
 
-.genChoice:hover .genIconChoice {
+
+.genButton:hover .genIconChoice {
     transform: scale(1.3);
 }
 
-.genChoice:hover .genDescriptionChoice {
+.genButton:hover .genDescriptionChoice {
     color: #222222;
 }
 
-.genChoice:active .genIconChoice {
+.genButton:active .genIconChoice {
     transform: scale(1.02);
-}
-
-#iconGen #descriptionGen {
-    text-shadow: 0 0 10px #005500;
-    color: #005500;
 }
 
 .navButton {
