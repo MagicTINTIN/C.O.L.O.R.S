@@ -18,6 +18,20 @@ const schemesIDs = {
     squareValue: 8,
     rectangleValue: 9,
 }
+
+const schemesIcons = {
+    randomValue: "~",
+    monochromaticValue: "⋯",
+    analogousValue: "⦠",
+    complementaryValue: "-",
+    splitcomplementaryValue: "∹",
+    doublesplitcomplementaryValue: "∺",
+    compoundValue: "⊼",
+    triadicValue: "△",
+    squareValue: "◻",
+    rectangleValue: "▭",
+}
+
 const RANDOM = 0;
 const MONOCHROMATIC = 1;
 const ANALOGOUS = 2;

@@ -34,6 +34,55 @@
 </head>
 
 <body id="body">
+  <div id="panelGen">
+    <div class="genChoice">
+      <span class="genIconChoice" id="iconGen">⋅</span>
+      <span class="genDescriptionChoice" id="descriptionGen">⋅</span>
+    </div>
+  </div>
+  <div id="panelGenChoices">
+    <div class="genChoice">
+      <span class="genIconChoice">~</span>
+      <span class="genDescriptionChoice">Random</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">⋯</span>
+      <span class="genDescriptionChoice">Monochromatic</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">⦠</span>
+      <span class="genDescriptionChoice">Analogous</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">-</span>
+      <span class="genDescriptionChoice">Complementary</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">∹</span>
+      <span class="genDescriptionChoice">SplitCompl </span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">∺</span>
+      <span class="genDescriptionChoice">DoubleSplCompl</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">⊼</span>
+      <span class="genDescriptionChoice">Compound</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">△</span>
+      <span class="genDescriptionChoice">Triad</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">◻</span>
+      <span class="genDescriptionChoice">Square</span>
+    </div>
+    <div class="genChoice">
+      <span class="genIconChoice">▭</span>
+      <span class="genDescriptionChoice">Rectangle</span>
+    </div>
+  </div>
+
   <div id="panelControl">
     <img src="images/icon.png" id="logoNavBar">
     <span id="closePanel" class="navButton" onclick="previous()"><span class="btnIcon"
@@ -119,49 +168,48 @@
           <div class="typeChoice">
             <input type="radio" checked="checked" class="schemeSelection" name="chooseScheme" value="randomValue"
               id="randomValue">
-            <label for="randomValue">Random</label>
+            <label for="randomValue"><span class="genIconChoice">~</span> Random</label>
           </div>
           <h4 class="settingsInfo">The following methods will generate colors based on the first one of the row</h4>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="monochromaticValue"
               id="monochromaticValue">
-            <label for="monochromaticValue">Monochromatic</label>
+            <label for="monochromaticValue"><span class="genIconChoice">⋯</span> Monochromatic</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="analogousValue" id="analogousValue">
-            <label for="analogousValue">Analogous</label>
+            <label for="analogousValue"><span class="genIconChoice">⦠</span> Analogous</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="complementaryValue"
               id="complementaryValue">
-            <label for="complementaryValue">Complementary</label>
+            <label for="complementaryValue"><span class="genIconChoice">-</span> Complementary</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="splitcomplementaryValue"
               id="splitcomplementaryValue">
-            <label for="splitcomplementaryValue">Split Complementary</label>
+            <label for="splitcomplementaryValue"><span class="genIconChoice">∹</span> Split Complementary</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="doublesplitcomplementaryValue"
               id="doublesplitcomplementaryValue">
-            <label for="doublesplitcomplementaryValue">Double Split Complementary</label>
+            <label for="doublesplitcomplementaryValue"><span class="genIconChoice">∺</span> Double Split Complementary</label>
           </div>
           <div class="typeChoice">
-            <input type="radio" class="schemeSelection" name="chooseScheme" value="compoundValue"
-              id="compoundValue">
-            <label for="compoundValue">Compound</label>
+            <input type="radio" class="schemeSelection" name="chooseScheme" value="compoundValue" id="compoundValue">
+            <label for="compoundValue"><span class="genIconChoice">⊼</span> Compound</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="triadicValue" id="triadicValue">
-            <label for="triadicValue">Triad</label>
+            <label for="triadicValue"><span class="genIconChoice">△</span> Triad</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="squareValue" id="squareValue">
-            <label for="squareValue">Square</label>
+            <label for="squareValue"><span class="genIconChoice">◻</span> Square</label>
           </div>
           <div class="typeChoice">
             <input type="radio" class="schemeSelection" name="chooseScheme" value="rectangleValue" id="rectangleValue">
-            <label for="rectangleValue">Rectangle</label>
+            <label for="rectangleValue"><span class="genIconChoice">▭</span> Rectangle</label>
           </div>
         </div>
 
