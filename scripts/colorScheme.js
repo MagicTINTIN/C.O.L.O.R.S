@@ -6,7 +6,8 @@ const SPLIT_COMP_DISTRIBUTION = 4;
 const DOUBLE_SPLIT_COMP_DISTRIBUTION = 5;
 const COMPOUND_DISTRIBUTION = 6;
 
-const VARIATION_FACTOR = 0.67;
+VARIATION_FACTOR = 0.7;
+ANGLE_MULTIPLIER = 1;
 
 function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, cycleSize = 360 / angle) {
     const prefix = base.startsWith("#");
@@ -264,19 +265,19 @@ function generateMonochromatic(color, n) {
     return generateGeometricalColors(color, n, 0, MONOCHROMATIC_DISTRIBUTION, -1);
 }
 
-function generateSplitComplementary(color, n, angle = 18) {
+function generateSplitComplementary(color, n, angle = 18 * ANGLE_MULTIPLIER) {
     return generateGeometricalColors(color, n, angle, SPLIT_COMP_DISTRIBUTION, 3);
 }
 
-function generateDoubleSplitComplementary(color, n, angle = 31) {
+function generateDoubleSplitComplementary(color, n, angle = 31 * ANGLE_MULTIPLIER) {
     return generateGeometricalColors(color, n, angle, DOUBLE_SPLIT_COMP_DISTRIBUTION, 5);
 }
 
-function generateCompound(color, n, angle = 30) {
+function generateCompound(color, n, angle = 30 * ANGLE_MULTIPLIER) {
     return generateGeometricalColors(color, n, angle, COMPOUND_DISTRIBUTION, 4);
 }
 
-function generateAnalogous(color, n, angleMax = 36) {
+function generateAnalogous(color, n, angleMax = 36 * ANGLE_MULTIPLIER) {
     return generateGeometricalColors(color, n, angleMax, ANALOGOUS_DISTRIBUTION, -1);
 }
 

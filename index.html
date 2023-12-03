@@ -166,9 +166,9 @@
       <div id="settingsContent">
         <h2 id="hueTypeTitle" class="settingsTitle">Advanced tweaks</h2>
         <div class="infoAndValueSettings"><span>Angle multiplier (default: 1)</span><span>Value: <span id="angleMultiplierValue"></span>1</span></div>
-        <input id="angleMultiplier" class="advancedRangesSettings" type=range value="1" step="0.05" min="0.1" max="5"><br>
+        <input onchange="updateAngleMultiplier(this)" id="angleMultiplier" class="advancedRangesSettings" type=range value="1" step="0.05" min="0.1" max="5"><br>
         <div class="infoAndValueSettings"><span>Variation multiplier (default: 0.7)</span><span>Value: <span id="variationMultiplierValue">0.7</span></span></div>
-        <input id="variationMultiplier" class="advancedRangesSettings" type=range value="0.7" step="0.01" min="0.1" max="1"><br>
+        <input onchange="updateVariationMultiplier(this)" id="variationMultiplier" class="advancedRangesSettings" type=range value="0.7" step="0.01" min="0.1" max="1"><br>
         <h2 id="hueTypeTitle" class="settingsTitle">Choose a hue type</h2>
         <div id="hueTypeChoices">
           <div class="typeChoice">

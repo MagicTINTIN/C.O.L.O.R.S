@@ -310,3 +310,15 @@ function applyModifiers(hFactor, sFactor, vFactor) {
     saveColorsToHistory();
     updateColors();
 }
+
+function updateAngleMultiplier(object) {
+    document.getElementById("angleMultiplierValue").innerHTML = object.value;
+    ANGLE_MULTIPLIER = object.value;
+    generateNewColors();
+}
+
+function updateVariationMultiplier(object) {
+    document.getElementById("variationMultiplierValue").innerHTML = object.value;
+    VARIATION_FACTOR = object.value;
+    generateNewColors();
+}
