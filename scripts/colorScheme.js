@@ -20,7 +20,7 @@ const SPLIT_COMP_DISTRIBUTION = 4;
 const DOUBLE_SPLIT_COMP_DISTRIBUTION = 5;
 const COMPOUND_DISTRIBUTION = 6;
 
-const VARIATION_FACTOR = 0.75;
+const VARIATION_FACTOR = 0.67;
 
 function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, cycleSize = 360 / angle) {
     const prefix = base.startsWith("#");
@@ -107,7 +107,7 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
         }
 
         for (let anb = 1; anb < before + 1; anb++) {
-            let hsvColor = { h: (baseHue - angle * anb / before) % 360, s: baseSat, v: baseVal }
+            let hsvColor = { h: positiveModulo(baseHue - angle * anb / before, 360), s: baseSat, v: baseVal }
             const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
             if (prefix)
                 geometryColors.push(newColor);
@@ -150,22 +150,72 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
         }
     }
     else if (type == SPLIT_COMP_DISTRIBUTION) {
-        const splitComplementaryColors = [
-            color,
-            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(180 - angle) % 360}, 100%, 50%)`
-        ];
+        for (let varnb = 1; varnb < maxVariations; varnb++) {
+            let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
+        }
+        for (let colornb = 1; colornb < cycleSize; colornb++) {
+            let nbvariations = colornb < maxVariationsUntil ? maxVariations : minVariations;
 
+            let newAngle = baseHue;
+            if (colornb % cycleSize == 1) {
+                newAngle = positiveModulo(baseHue + 180 - angle, 360);  
+            }
+            else if (colornb % cycleSize == 2) {
+                newAngle = (baseHue + angle + 180) % 360;  
+            }
+            console.log("SPLIT: ", colornb, " > ", newAngle);
+
+            for (let varnb = 0; varnb < nbvariations; varnb++) {
+                let hsvColor = { h: newAngle, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+                const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+                if (prefix)
+                    geometryColors.push(newColor);
+                else
+                    geometryColors.push(newColor.replace("#", ""));
+            }
+        }
     }
     else if (type == DOUBLE_SPLIT_COMP_DISTRIBUTION) {
-        const splitComplementaryColors = [
-            color,
-            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(180 - angle) % 360}, 100%, 50%)`,
-            `hsl(${(0 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(0 - angle) % 360}, 100%, 50%)`
-        ];
+        for (let varnb = 1; varnb < maxVariations; varnb++) {
+            let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
+        }
+        for (let colornb = 1; colornb < cycleSize; colornb++) {
+            let nbvariations = colornb < maxVariationsUntil ? maxVariations : minVariations;
 
+            let newAngle = baseHue;
+            if (colornb % cycleSize == 1) {
+                newAngle = (baseHue + angle) % 360;  
+            }
+            else if (colornb % cycleSize == 2) {
+                newAngle = positiveModulo(baseHue + 180 - angle, 360);  
+            }
+            if (colornb % cycleSize == 3) {
+                newAngle = (baseHue + 180 + angle) % 360;  
+            }
+            else if (colornb % cycleSize == 4) {
+                newAngle = positiveModulo(baseHue - angle, 360);  
+            }
+            console.log("DOUBLE SPLIT: ", colornb, " > ", newAngle);
+
+            for (let varnb = 0; varnb < nbvariations; varnb++) {
+                let hsvColor = { h: newAngle, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+                const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+                if (prefix)
+                    geometryColors.push(newColor);
+                else
+                    geometryColors.push(newColor.replace("#", ""));
+            }
+        }
     }
     else if (type == COMPOUND_DISTRIBUTION) {
         for (let varnb = 1; varnb < maxVariations; varnb++) {
@@ -180,14 +230,14 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
             let nbvariations = colornb < maxVariationsUntil ? maxVariations : minVariations;
 
             let newAngle = baseHue;
-            if (colornb % 4 == 1) {
-                newAngle = (baseHue - angle) % 360;
-            }
-            else if (colornb % 4 == 2) {
+            if (colornb % cycleSize == 1) {
                 newAngle = (baseHue + 180) % 360;
             }
-            else if (colornb % 4 == 3) {
+            else if (colornb % cycleSize == 2) {
                 newAngle = (baseHue + 180 + angle) % 360;
+            }
+            else if (colornb % cycleSize == 3) {
+                newAngle = positiveModulo(baseHue - angle, 360);
             }
 
             for (let varnb = 0; varnb < nbvariations; varnb++) {
@@ -230,11 +280,11 @@ function generateMonochromatic(color, n) {
     return generateGeometricalColors(color, n, 0, MONOCHROMATIC_DISTRIBUTION, -1);
 }
 
-function generateSplitComplementary(color, n, angle = 30) {
+function generateSplitComplementary(color, n, angle = 18) {
     return generateGeometricalColors(color, n, angle, SPLIT_COMP_DISTRIBUTION, 3);
 }
 
-function generateDoubleSplitComplementary(color, n, angle = 30) {
+function generateDoubleSplitComplementary(color, n, angle = 31) {
     return generateGeometricalColors(color, n, angle, DOUBLE_SPLIT_COMP_DISTRIBUTION, 5);
 }
 
@@ -253,9 +303,9 @@ const numberOfColors = 6;
 const monochromatic = generateMonochromatic(startingColor, numberOfColors);
 const analogous = generateAnalogous(startingColor, numberOfColors);
 const complementary = generateComplementary(startingColor, numberOfColors);
-// const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
-// const doubleSplitComplementary = generateDoubleSplitComplementary(startingColor, numberOfColors);
-// const compound = generateCompound(startingColor, numberOfColors);
+const splitComplementary = generateSplitComplementary(startingColor, numberOfColors);
+const doubleSplitComplementary = generateDoubleSplitComplementary(startingColor, numberOfColors);
+const compound = generateCompound(startingColor, numberOfColors);
 const triadic = generateTriadic(startingColor, numberOfColors);
 const square = generateSquare(startingColor, numberOfColors);
 const rectangle = generateRectangle(startingColor, numberOfColors);
@@ -263,9 +313,9 @@ const rectangle = generateRectangle(startingColor, numberOfColors);
 console.log("Monochromatic:", monochromatic);
 console.log("Analogous:", analogous);
 console.log("Complementary:", complementary);
-// console.log("Split Complementary:", splitComplementary);
-// console.log("Double Split Complementary:", doubleSplitComplementary);
-// console.log("Compound:", compound);
+console.log("Split Complementary:", splitComplementary);
+console.log("Double Split Complementary:", doubleSplitComplementary);
+console.log("Compound:", compound);
 console.log("Triadic:", triadic);
 console.log("Square:", square);
 console.log("Rectangle:", rectangle);
