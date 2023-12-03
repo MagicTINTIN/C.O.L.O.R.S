@@ -5,7 +5,7 @@ window.displaySettings = false;
 window.displayOptions = false;
 window.modifyOnlySelected = false;
 
-document.getElementById("body").addEventListener("keyup", (e) => {
+function getKeyEvent(e) {
     //console.log(e, e.key);
     if (e.key == "ArrowUp")
         openPanel()
@@ -23,7 +23,16 @@ document.getElementById("body").addEventListener("keyup", (e) => {
         toggleOptions();
     if (e.key.toUpperCase() == "O")
         toggleModifySelected();
-});
+};
+
+function enableGetKey() {
+    document.body.addEventListener('keyup', getKeyEvent);
+}
+function disableGetKey() {
+    document.body.removeEventListener('keyup', getKeyEvent);
+}
+
+enableGetKey();
 
 window.pageColors = [];
 window.numberOfColors = 5;
@@ -53,7 +62,7 @@ function updateColors() {
         else
             newContent += `<div id="color${color.hex}${color.isLocked ? "L" : ""}" class="color" style="background:#${color.hex}; width:${100 / numberOfColors}vw; height:${100 / numberOfColors}vh; color:${isColorBright(color.hex) ? "black" : "white"};">`;
         newContent += `<span class="colorName static">${getClosestColor(color.hex)}</span>
-        <input onpaste="updateColorHex(this)" oninput="updateColorHex(this)" size="7" maxlength="7" class="colorHex static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} type="text" name="updatePseudo" id="hex${color.hex}" value="#${color.hex}">
+        <input onpaste="updateColorHex(this)" oninput="updateColorHex(this)" onfocus="disableGetKey()" onblur="enableGetKey()" size="7" maxlength="7" class="colorHex static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} type="text" name="updatePseudo" id="hex${color.hex}" value="#${color.hex}">
         <span class="deleteContainer static"><span class="delete static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""} onclick=" if (!copytcb('#${color.hex}')) copied(this);">⧉</span></span>
         <span class="deleteContainer static"><span class="lock static ${color.isLocked ? "locked" : "unlocked"}" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""}  onclick="lockColor(this, '${color.hex}')">${color.isLocked ? "☑" : "☐"}</span></span>
         ${(window.numberOfColors <= 2) ? "" : `<span class="deleteContainer static"><span class="delete static" ${isColorBright(color.hex) ? "" : "style=\"filter: invert(1) hue-rotate(180deg);\""}  onclick="deleteColor('${color.hex}')">×</span></span>`}
@@ -204,6 +213,7 @@ function updateButtons() {
 }
 
 function updateColorHex(object) {
+    disableGetKey()
     if (!isValidHexColor(object.value))
         return object.classList.add("invalidColor");
     object.classList.remove("invalidColor");
@@ -219,6 +229,9 @@ function updateColorHex(object) {
     window.pageColors = newColors;
     saveColorsToHistory();
     updateColors();
+    object.focus();
+    object.select();
+    object.setSelectionRange(0, 0);
 }
 
 function toggleSettings() {

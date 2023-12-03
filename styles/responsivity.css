@@ -1,4 +1,3 @@
-
 @media screen and (orientation:landscape) {
     #openControl {
         opacity: .5;
@@ -50,6 +49,28 @@
 }
 
 @media screen and (orientation:portrait) {
+    #panelGen {
+        opacity: 1;
+    }
+
+    .genDescriptionChoice {
+        display: none;
+    }
+
+    #panelGenChoices {
+        width: 90vw;
+    }
+
+    #panelGen,
+    #panelGenChoices {
+        height: 4vh;
+        top: 0;
+    }
+
+    .genIconChoice {
+        font-size: calc(4vh - 5px);
+    }
+    
     #panelControl {
         width: 90vw;
         height: 5vh;
@@ -112,12 +133,17 @@
     .genDescriptionChoice {
         display: none;
     }
+
     #panelGenChoices {
         width: 90vw;
     }
-    #panelGen, #panelGenChoices {
+
+    #panelGen,
+    #panelGenChoices {
+        top: 0px;
         height: 4vh;
     }
+
     .genIconChoice {
         font-size: calc(4vh - 5px);
     }
@@ -133,12 +159,17 @@
     .genDescriptionChoice {
         display: none;
     }
+
     #panelGenChoices {
         width: 90vw;
     }
-    #panelGen, #panelGenChoices {
+
+    #panelGen,
+    #panelGenChoices {
         height: 4vh;
+        top: 0;
     }
+
     .genIconChoice {
         font-size: calc(4vh - 5px);
     }

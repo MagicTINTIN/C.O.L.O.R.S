@@ -137,8 +137,9 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
         return colors;
     } else {
         let colors = []
-        let numberOfColorToGen = 1;
-        existingColors.map((col) => { if (col.isLocked === false) numberOfColorToGen++; });
+        let numberOfColorToGen = 0;
+        let cnb = 0;
+        existingColors.map((col) => { if (col.isLocked === false || cnb == 0) numberOfColorToGen++; cnb++; });
 
         let col = existingColors[0];
         let startingColor = "#000000";
