@@ -117,7 +117,6 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
     }
 
     else if (type == RECTANGLE_DISTRIBUTION) {
-
         for (let varnb = 1; varnb < maxVariations; varnb++) {
             let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
             const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
@@ -131,13 +130,13 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
 
             let newAngle = baseHue;
             if (colornb % 4 == 1) {
-                newAngle = (baseHue + angle) % 360;  
+                newAngle = (baseHue + angle) % 360;
             }
             else if (colornb % 4 == 2) {
-                newAngle = (baseHue + 180) % 360;  
+                newAngle = (baseHue + 180) % 360;
             }
             else if (colornb % 4 == 3) {
-                newAngle = (baseHue + + 180 + angle) % 360;  
+                newAngle = (baseHue + 180 + angle) % 360;
             }
 
             for (let varnb = 0; varnb < nbvariations; varnb++) {
@@ -162,21 +161,44 @@ function generateGeometricalColors(base, n, angle, type = UNIFORM_DISTRIBUTION, 
         const splitComplementaryColors = [
             color,
             `hsl(${(180 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(180 - angle) % 360}, 100%, 50%)`
+            `hsl(${(180 - angle) % 360}, 100%, 50%)`,
             `hsl(${(0 + angle) % 360}, 100%, 50%)`,
             `hsl(${(0 - angle) % 360}, 100%, 50%)`
         ];
 
     }
     else if (type == COMPOUND_DISTRIBUTION) {
-        const splitComplementaryColors = [
-            color,
-            `hsl(${(0 - angle) % 360}, 100%, 50%)`,
-            `hsl(${(180) % 360}, 100%, 50%)`
-            `hsl(${(180 + angle) % 360}, 100%, 50%)`,
-            `hsl(${(0 - angle) % 360}, 100%, 50%)`
-        ];
+        for (let varnb = 1; varnb < maxVariations; varnb++) {
+            let hsvColor = { h: baseHue, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+            const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+            if (prefix)
+                geometryColors.push(newColor);
+            else
+                geometryColors.push(newColor.replace("#", ""));
+        }
+        for (let colornb = 1; colornb < cycleSize; colornb++) {
+            let nbvariations = colornb < maxVariationsUntil ? maxVariations : minVariations;
 
+            let newAngle = baseHue;
+            if (colornb % 4 == 1) {
+                newAngle = (baseHue - angle) % 360;
+            }
+            else if (colornb % 4 == 2) {
+                newAngle = (baseHue + 180) % 360;
+            }
+            else if (colornb % 4 == 3) {
+                newAngle = (baseHue + 180 + angle) % 360;
+            }
+
+            for (let varnb = 0; varnb < nbvariations; varnb++) {
+                let hsvColor = { h: newAngle, s: baseSat * VARIATION_FACTOR ** varnb, v: baseVal * VARIATION_FACTOR ** varnb }
+                const newColor = rgbColorToHex(HSVtoRGB(hsvColor));
+                if (prefix)
+                    geometryColors.push(newColor);
+                else
+                    geometryColors.push(newColor.replace("#", ""));
+            }
+        }
     }
     else {
         // by default push only base color
