@@ -281,6 +281,12 @@ body {
     overflow-y: auto;
 }
 
+
+.settingsInfo {
+    text-align: center;
+    font-family: 'Lucida Console', monospace;
+}
+
 .settingsTitle {
     font-size: 2vh;
     text-align: center;

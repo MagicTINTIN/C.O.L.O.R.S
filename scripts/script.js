@@ -41,3 +41,7 @@ function formatNumber(val, max, charToFill=' ')
 	output += val;
 	return output;
 }
+
+function positiveModulo(val, mod) {
+    return ((val % mod) + mod) % mod;
+}
