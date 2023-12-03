@@ -9,5 +9,4 @@ Generate your own color scheme quickly !
 ### Future features
 ```
 - fix grab on touchscreen (if possible ?)
-- implementing generation using monochromatic, analogous, complementary, split complementary, triadic square and rectangle schemes
 ```

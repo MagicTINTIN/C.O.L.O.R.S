@@ -1,4 +1,35 @@
-function newColor() {
+window.hueType = 0;
+window.schemeUsed = 0
+
+const hueTypeIDs = {
+    normalHueType: 0,
+    adobeHueType: 1
+}
+
+const schemesIDs = {
+    randomValue: 0,
+    monochromaticValue: 1,
+    analogousValue: 2,
+    complementaryValue: 3,
+    splitcomplementaryValue: 4,
+    doublesplitcomplementaryValue: 5,
+    compoundValue: 6,
+    triadicValue: 7,
+    squareValue: 8,
+    rectangleValue: 9,
+}
+const RANDOM = 0;
+const MONOCHROMATIC = 1;
+const ANALOGOUS = 2;
+const COMPLEMENTARY = 3;
+const SPLIT_COMPLEMENTARY = 4;
+const DOUBLE_SPLIT_COMPLEMENTARY = 5;
+const COMPOUND = 6;
+const TRIADIC = 7;
+const SQUARE = 8;
+const RECTANGLE = 9;
+
+function newRandomColor() {
     let color = ''
     for (let i = 0; i < 6; i++) {
         let randomVal = Math.floor(Math.random() * (15 - 0 + 1)) + 0;
@@ -24,24 +55,67 @@ function colorsGenerator(isFirst, colorNumber = 5, existingColors = []) {
     if (isFirst) {
         let colors = []
         for (let i = 0; i < colorNumber; i++) {
-            let color = newColor()
-            colors = [...colors, { isLocked: false, hex: color }]
+            let color = newRandomColor();
+            colors = [...colors, { isLocked: false, hex: color }];
         }
-        return colors
+        existingColors = colors;
     }
-    if (isFirst === false) {
+    if (window.schemeUsed == RANDOM) {
         let colors = []
         existingColors.map((col) => {
             if (col.isLocked === false) {
-                let color = newColor()
-                col.hex = color
-                colors = [...colors, col]
+                let color = newRandomColor();
+                col.hex = color;
+                colors = [...colors, col];
             }
-            if (col.isLocked === true) {
-                colors = [...colors, col]
+            else {
+                colors = [...colors, col];
             }
-        })
-        return colors
+        });
+        return colors;
+    } else {
+        let colors = []
+        let numberOfColorToGen = 1;
+        existingColors.map((col) => { if (col.isLocked === false) numberOfColorToGen++; });
+
+        let col = existingColors[0];
+        let startingColor = "#000000";
+        if (col.isLocked === false) {
+            let color = newRandomColor();
+            col.hex = color;
+            startingColor = color;
+        }
+        else {
+            startingColor = col.hex;
+        }
+
+        let geometricColors = [];
+        if (window.schemeUsed == MONOCHROMATIC) geometricColors = generateMonochromatic(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == ANALOGOUS) geometricColors = generateAnalogous(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == COMPLEMENTARY) geometricColors = generateComplementary(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == SPLIT_COMPLEMENTARY) geometricColors = generateSplitComplementary(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == DOUBLE_SPLIT_COMPLEMENTARY) geometricColors = generateDoubleSplitComplementary(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == COMPOUND) geometricColors = generateCompound(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == TRIADIC) geometricColors = generateTriadic(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == SQUARE) geometricColors = generateSquare(startingColor, numberOfColorToGen);
+        else if (window.schemeUsed == RECTANGLE) geometricColors = generateRectangle(startingColor, numberOfColorToGen);
+        else return existingColors;
+
+        let newColorIndex = 0;
+        existingColors.map((col) => {
+            if (col.isLocked === false) {
+                let color = geometricColors[newColorIndex];
+                col.hex = color;
+                colors = [...colors, col];
+                newColorIndex++;
+            }
+            else {
+                colors = [...colors, col];
+                if (newColorIndex == 0)
+                    newColorIndex++;
+            }
+        });
+        return colors;
     }
 }
 
@@ -112,12 +186,6 @@ function isValidHexColor(hex) {
     let checkHex = hex.split("#").join("");
     const hexRegex = /^([0-9a-fA-F]{6})$/; //[0-9a-fA-F]{3}| but I don't want the 3th version
     return hexRegex.test(checkHex);
-}
-
-window.hueType = 1;
-const hueTypeIDs = {
-    normalHueType: 0,
-    adobeHueType: 1
 }
 
 RGBtoHSV = function (color) {

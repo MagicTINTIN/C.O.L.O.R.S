@@ -1,6 +1,10 @@
 window.MAX_COLORS = 30;
 window.displayNames = true;
 
+window.displaySettings = false;
+window.displayOptions = false;
+window.modifyOnlySelected = false;
+
 document.getElementById("body").addEventListener("keyup", (e) => {
     //console.log(e, e.key);
     if (e.key == "ArrowUp")
@@ -41,7 +45,7 @@ function updateColors() {
         if (i < window.pageColors.length - 1)
             midColor = findMediumColor(color.hex, window.pageColors[i + 1].hex)
         else
-            midColor = "#" + newColor()
+            midColor = "#" + newRandomColor()
         let colorRGB = hexToRgb(color.hex);
 
         if (window.numberOfColors <= window.MAX_COLORS)
@@ -217,7 +221,6 @@ function updateColorHex(object) {
     updateColors();
 }
 
-window.displaySettings = false;
 function toggleSettings() {
     window.displaySettings = !window.displaySettings;
     if (window.displaySettings)
@@ -241,7 +244,6 @@ function hideSettings() {
     settings.style.transform = "scale(0)";
 }
 
-window.displayOptions = false;
 function toggleOptions() {
     window.displayOptions = !window.displayOptions;
     if (window.displayOptions)
@@ -263,7 +265,6 @@ function hideOptions() {
 
 hideOptions()
 
-window.modifyOnlySelected = false;
 function toggleModifySelected() {
     window.modifyOnlySelected = !window.modifyOnlySelected;
     if (window.modifyOnlySelected)

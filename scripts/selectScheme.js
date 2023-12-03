@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
       match.addEventListener('change', function() {
         console.log(`Color Scheme := ${this.value}`);
         window.schemeUsed = schemesIDs[this.value]
+        generateNewColors();
       });
     });
   });
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
       match.addEventListener('change', function() {
         console.log(`Hue type := ${this.value}`);
         window.hueType = hueTypeIDs[this.value]
+        generateNewColors();
       });
     });
   });
